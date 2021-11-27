@@ -37,17 +37,38 @@
 					></el-input>
 				</el-form-item>
 
-				<el-form-item label="Password" prop="pass">
+				<el-form-item label="Hasło" prop="pass">
 					<el-input
 						type="password"
 						v-model="regForm.pass"
 						autocomplete="off"
 					></el-input>
 				</el-form-item>
-				<el-form-item label="Confirm" prop="checkPass">
+				<el-form-item label="Potwierdź hasło" prop="checkPass">
 					<el-input
 						type="password"
 						v-model="regForm.checkPass"
+						autocomplete="off"
+					></el-input>
+				</el-form-item>
+				<el-form-item label="Imię" prop="name">
+					<el-input
+						type="name"
+						v-model="regForm.name"
+						autocomplete="off"
+					></el-input>
+				</el-form-item>
+				<el-form-item label="Nazwisko" prop="lastname">
+					<el-input
+						type="lastname"
+						v-model="regForm.lastname"
+						autocomplete="off"
+					></el-input>
+				</el-form-item>
+				<el-form-item label="Numer telefonu" prop="phone">
+					<el-input
+						type="phone"
+						v-model="regForm.phone"
 						autocomplete="off"
 					></el-input>
 				</el-form-item>
@@ -63,26 +84,27 @@
 </template>
 <script>
 import bcrypt from "bcryptjs";
+import { uuid } from "vue-uuid";
 
 export default {
 	data() {
 		var validateEmail = (rule, value, callback) => {
 			if (value === "") {
-				callback(new Error("Please input the email"));
+				callback(new Error("Proszę wprowadzić email"));
 			} else {
 				callback();
 			}
 		};
 		var validateLogin = (rule, value, callback) => {
 			if (value === "") {
-				callback(new Error("Please input the login"));
+				callback(new Error("Proszę wprowadzić login"));
 			} else {
 				callback();
 			}
 		};
 		var validatePass = (rule, value, callback) => {
 			if (value === "" || value.length < 4) {
-				callback(new Error("Please input the password"));
+				callback(new Error("Proszę wprowadzić hasło"));
 			} else {
 				if (this.regForm.checkPass !== "") {
 					this.$refs.regForm.validateField("checkPass");
@@ -92,9 +114,30 @@ export default {
 		};
 		var validatePass2 = (rule, value, callback) => {
 			if (value === "") {
-				callback(new Error("Please input the password again"));
+				callback(new Error("Proszę wprowadzić hasło ponownie"));
 			} else if (value !== this.regForm.pass) {
 				callback(new Error("Two inputs don't match!"));
+			} else {
+				callback();
+			}
+		};
+		var validateName = (rule, value, callback) => {
+			if (value === "") {
+				callback(new Error("Proszę wprowadzić imię"));
+			} else {
+				callback();
+			}
+		};
+		var validateLastname = (rule, value, callback) => {
+			if (value === "") {
+				callback(new Error("Proszę wprowadzić nazwisko"));
+			} else {
+				callback();
+			}
+		};
+		var validatePhone = (rule, value, callback) => {
+			if (value === "") {
+				callback(new Error("Proszę wprowadzić numer telefonu"));
 			} else {
 				callback();
 			}
@@ -105,12 +148,19 @@ export default {
 				login: "",
 				pass: "",
 				checkPass: "",
+				name: "",
+				lastname: "",
+				phone: "",
+				uuid: uuid.v1(),
 			},
 			rules: {
 				email: [{ validator: validateEmail, trigger: "blur" }],
 				login: [{ validator: validateLogin, trigger: "blur" }],
 				pass: [{ validator: validatePass, trigger: "blur" }],
 				checkPass: [{ validator: validatePass2, trigger: "blur" }],
+				name: [{ validator: validateName, trigger: "blur" }],
+				lastname: [{ validator: validateLastname, trigger: "blur" }],
+				phone: [{ validator: validatePhone, trigger: "blur" }],
 			},
 			hashedPassword: "",
 		};
