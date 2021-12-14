@@ -22,13 +22,6 @@
 				label-width="120px"
 				class="demo-ruleForm"
 			>
-				<el-form-item label="Login" prop="login">
-					<el-input
-						type="login"
-						v-model="regForm.login"
-						autocomplete="off"
-					></el-input>
-				</el-form-item>
 				<el-form-item label="Email" prop="email">
 					<el-input
 						type="email"
@@ -37,10 +30,10 @@
 					></el-input>
 				</el-form-item>
 
-				<el-form-item label="Hasło" prop="pass">
+				<el-form-item label="Hasło" prop="password">
 					<el-input
 						type="password"
-						v-model="regForm.pass"
+						v-model="regForm.password"
 						autocomplete="off"
 					></el-input>
 				</el-form-item>
@@ -65,10 +58,10 @@
 						autocomplete="off"
 					></el-input>
 				</el-form-item>
-				<el-form-item label="Numer telefonu" prop="phone">
+				<el-form-item label="Numer telefonu" prop="phone_number">
 					<el-input
-						type="phone"
-						v-model="regForm.phone"
+						type="phone_number"
+						v-model="regForm.phone_number"
 						autocomplete="off"
 					></el-input>
 				</el-form-item>
@@ -84,20 +77,12 @@
 </template>
 <script>
 import bcrypt from "bcryptjs";
-import { uuid } from "vue-uuid";
 
 export default {
 	data() {
 		var validateEmail = (rule, value, callback) => {
 			if (value === "") {
 				callback(new Error("Proszę wprowadzić email"));
-			} else {
-				callback();
-			}
-		};
-		var validateLogin = (rule, value, callback) => {
-			if (value === "") {
-				callback(new Error("Proszę wprowadzić login"));
 			} else {
 				callback();
 			}
@@ -115,8 +100,8 @@ export default {
 		var validatePass2 = (rule, value, callback) => {
 			if (value === "") {
 				callback(new Error("Proszę wprowadzić hasło ponownie"));
-			} else if (value !== this.regForm.pass) {
-				callback(new Error("Two inputs don't match!"));
+			} else if (value !== this.regForm.password) {
+				callback(new Error("Hasła są różne!"));
 			} else {
 				callback();
 			}
@@ -145,24 +130,29 @@ export default {
 		return {
 			regForm: {
 				email: "",
-				login: "",
-				pass: "",
-				checkPass: "",
+				password: "",
 				name: "",
 				lastname: "",
-				phone: "",
-				uuid: uuid.v1(),
+				phone_number: "",
 			},
 			rules: {
 				email: [{ validator: validateEmail, trigger: "blur" }],
-				login: [{ validator: validateLogin, trigger: "blur" }],
-				pass: [{ validator: validatePass, trigger: "blur" }],
+				password: [{ validator: validatePass, trigger: "blur" }],
 				checkPass: [{ validator: validatePass2, trigger: "blur" }],
 				name: [{ validator: validateName, trigger: "blur" }],
 				lastname: [{ validator: validateLastname, trigger: "blur" }],
-				phone: [{ validator: validatePhone, trigger: "blur" }],
+				phone_number: [{ validator: validatePhone, trigger: "blur" }],
 			},
-			hashedPassword: "",
+
+			userData: {
+				email: "",
+				password: "",
+				name: "",
+				lastname: "",
+				phone_number: "",
+				user_confirmed: "0",
+				user_role: "803cc4dc-417c-11ec-81d3-0242ac130003",
+			},
 		};
 	},
 	methods: {
@@ -170,13 +160,24 @@ export default {
 			this.$refs.regForm.validate((valid) => {
 				if (valid) {
 					try {
-						this.hashedPassword = this.encryptPassword(
-							this.regForm.pass,
+						this.userData.password = this.encryptPassword(
+							this.regForm.password,
 						);
+
+						this.userData.email = this.regForm.email;
+						this.userData.name = this.regForm.name;
+						this.userData.lastname = this.regForm.lastname;
+						this.userData.phone_number = this.regForm.phone_number;
+
+						this.axios.post(
+							`https://localhost:44385/api/Users`,
+							this.userData,
+						);
+						console.log(this.userData);
 						alert("User added successfully");
-						this.$router.replace({ name: "mainPage" });
+						//this.$router.replace({ name: "mainPage" });
 					} catch (error) {
-						console.log("Something goes wrong: /n", error);
+						console.log("Something goes wrong: /n", error.massage);
 					}
 				}
 			});

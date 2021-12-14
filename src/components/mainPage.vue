@@ -34,6 +34,9 @@
 					<router-link :to="{ name: 'signIn' }">
 						<button>Zaloguj się</button>
 					</router-link>
+					<router-link :to="{ name: 'signUp' }">
+						<button>Zarejestruj się</button>
+					</router-link>
 				</template>
 			</vs-navbar>
 		</div>
