@@ -76,8 +76,6 @@
 	</div>
 </template>
 <script>
-import bcrypt from "bcryptjs";
-
 export default {
 	data() {
 		var validateEmail = (rule, value, callback) => {
@@ -143,52 +141,31 @@ export default {
 				lastname: [{ validator: validateLastname, trigger: "blur" }],
 				phone_number: [{ validator: validatePhone, trigger: "blur" }],
 			},
-
-			userData: {
-				email: "",
-				password: "",
-				name: "",
-				lastname: "",
-				phone_number: "",
-				user_confirmed: "0",
-				user_role: "803cc4dc-417c-11ec-81d3-0242ac130003",
-			},
 		};
 	},
 	methods: {
-		submitForm() {
-			this.$refs.regForm.validate((valid) => {
-				if (valid) {
-					try {
-						this.userData.password = this.encryptPassword(
-							this.regForm.password,
-						);
-
-						this.userData.email = this.regForm.email;
-						this.userData.name = this.regForm.name;
-						this.userData.lastname = this.regForm.lastname;
-						this.userData.phone_number = this.regForm.phone_number;
-
-						this.axios.post(
-							`https://localhost:44385/api/Users`,
-							this.userData,
-						);
-						console.log(this.userData);
-						alert("User added successfully");
-						//this.$router.replace({ name: "mainPage" });
-					} catch (error) {
-						console.log("Something goes wrong: /n", error.massage);
-					}
+		async submitForm() {
+			let isValidForm = await this.$refs.regForm.validate();
+			if (isValidForm) {
+				const result = await this.$auth.register({
+					email: this.regForm.email,
+					password: this.regForm.password,
+					name: this.regForm.name,
+					lastname: this.regForm.lastname,
+					phone_number: this.regForm.phone_number,
+				});
+				if (result.status === true) {
+					alert(
+						"Rejestracja przebiegła pomyślnie, poczekaj aż twoje konto zostanie aktywowane przez pracownika",
+					);
+					this.$router.push({ name: "mainPage" });
+					
 				}
-			});
+			}
 		},
-		resetForm(regForm) {
-			this.$refs[regForm].resetFields();
-		},
-		encryptPassword(password) {
-			const salt = bcrypt.genSaltSync(11);
-			return bcrypt.hashSync(password, salt);
-		},
+	},
+	resetForm(regForm) {
+		this.$refs[regForm].resetFields();
 	},
 };
 </script>

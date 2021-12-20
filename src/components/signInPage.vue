@@ -22,17 +22,17 @@
 				label-width="120px"
 				class="demo-ruleForm"
 			>
-				<el-form-item label="Login" prop="login">
+				<el-form-item label="Email" prop="email">
 					<el-input
-						type="login"
-						v-model="loginForm.login"
+						type="email"
+						v-model="loginForm.email"
 						autocomplete="off"
 					></el-input>
 				</el-form-item>
-				<el-form-item label="Password" prop="pass">
+				<el-form-item label="Password" prop="password">
 					<el-input
 						type="password"
-						v-model="loginForm.pass"
+						v-model="loginForm.password"
 						autocomplete="off"
 					>
 					</el-input>
@@ -50,8 +50,6 @@
 	</div>
 </template>
 <script>
-import bcrypt from "bcryptjs";
-
 export default {
 	data() {
 		var validateEmail = (rule, value, callback) => {
@@ -61,7 +59,7 @@ export default {
 				callback();
 			}
 		};
-		var validatePass = (rule, value, callback) => {
+		var validatePassword = (rule, value, callback) => {
 			if (value === "") {
 				callback(new Error("Please input the password"));
 			} else {
@@ -70,42 +68,25 @@ export default {
 		};
 		return {
 			loginForm: {
-				login: "",
-				pass: "",
+				email: "",
+				password: "",
 			},
 			rules: {
 				email: [{ validator: validateEmail, trigger: "blur" }],
-				pass: [{ validator: validatePass, trigger: "blur" }],
+				password: [{ validator: validatePassword, trigger: "blur" }],
 			},
-			comparePass: false,
 		};
 	},
 	methods: {
-		submitForm() {
-			try {
-				console.log("Login succesfully");
-			} catch (error) {
-				console.log("Something goes wrong: /n", error);
-			}
+		async submitForm() {
+			await this.$auth.logIn({
+				email: this.loginForm.email,
+				password: this.loginForm.password,
+			});
+			this.$router.push({ name: "mainPage" });
 		},
 		resetForm(loginForm) {
 			this.$refs[loginForm].resetFields();
-		},
-		userAuth(login, password) {
-			this.comparePass = bcrypt.compareSync(
-				this.loginForm.pass,
-				password,
-			);
-			console.log(this.comparePass);
-			console.log(login);
-			if (this.loginForm.login == login && this.comparePass == true) {
-				let login = this.loginForm.login;
-				this.$store.dispatch("login", { login });
-				alert("Sign in successfully");
-				this.$router.replace({ name: "mainPage" });
-			} else {
-				alert("Something goes wrong. Check your login data!");
-			}
 		},
 	},
 };
