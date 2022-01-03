@@ -1,5 +1,5 @@
 export default {
-	Admin: { name: "Companies Table" },
-	Users: { name: "Users Table" },
-	Employee: { name: "Dashboard" },
+	Admin: { name: "forAdmin" },
+	User: { name: "forUser" },
+	Employee: { name: "forEmployee" },
 };

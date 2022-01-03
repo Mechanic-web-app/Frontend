@@ -50,6 +50,8 @@
 	</div>
 </template>
 <script>
+
+
 export default {
 	data() {
 		var validateEmail = (rule, value, callback) => {
@@ -89,6 +91,7 @@ export default {
 			this.$refs[loginForm].resetFields();
 		},
 	},
+
 };
 </script>
 <style scoped>

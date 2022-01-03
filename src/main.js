@@ -1,4 +1,7 @@
 import axios from "axios";
+import { BootstrapVue, IconsPlugin } from "bootstrap-vue";
+import "bootstrap-vue/dist/bootstrap-vue.css";
+import "bootstrap/dist/css/bootstrap.css";
 import ElementUI from "element-ui";
 import elementLocale from "element-ui/lib/locale/lang/en";
 import "element-ui/lib/theme-chalk/index.css";
@@ -14,6 +17,8 @@ import router from "./router";
 import authorizationService from "./services/authorizationService";
 import store from "./store";
 
+Vue.use(BootstrapVue);
+Vue.use(IconsPlugin);
 Vue.use(VueRouter, ElementUI);
 Vue.use(ElementUI, { locale: elementLocale });
 Vue.use(Vuesax);

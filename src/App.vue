@@ -10,7 +10,7 @@ import cookieHelper from "./helpers/cookieHelper";
 import roleRedirect from "./helpers/roleRedirect";
 export default {
 	computed: {
-		...mapGetters(["user", "isLogged", "isAdmin"]),
+		...mapGetters(["isAdmin", "isEmployee", "isUser", "isLogged"]),
 		hasToken() {
 			return cookieHelper.hasSessionCookie();
 		},
@@ -25,6 +25,7 @@ export default {
 		user(newVal) {
 			if (newVal !== null) {
 				this.restoreSession(newVal);
+				console.log(newVal);
 			} else {
 				this.$router.push({ name: "Login" });
 			}
@@ -37,15 +38,11 @@ export default {
 </script>
 
 <style>
-#app {
-	font-family: Avenir, Helvetica, Arial, sans-serif;
-	-webkit-font-smoothing: antialiased;
-	-moz-osx-font-smoothing: grayscale;
-	text-align: center;
-	color: #2c3e50;
+@font-face {
+	font-family: "Roboto-Regular";
+	src: url("./assets/fonts/Roboto-Regular.ttf");
 }
-* {
-	padding: 0;
-	margin: 0;
+body {
+	background-color: #121212;
 }
 </style>

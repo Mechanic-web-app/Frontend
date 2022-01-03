@@ -2,7 +2,6 @@ import Vue from "vue";
 import Vuex from "vuex";
 import cookieHelper from "../helpers/cookieHelper";
 import parseJwt from "../helpers/parseJwt";
-
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -12,9 +11,11 @@ export default new Vuex.Store({
 	getters: {
 		user: (state) => state.user,
 		isLogged: (state) => !!state.user,
-		isAdmin: (state) => !!state.user && state.user.role === "Admin",
-		isEmployee: (state) => !!state.user && state.user.role === "Employee",
-		isUser: (state) => !!state.user && state.user.role === "User"
+		isAdmin: (state) => !!state.user && state.user.Role === "Admin",
+		isEmployee: (state) => !!state.user && state.user.Role === "Employee",
+		isUser: (state) => !!state.user && state.user.Role === "User",
+		userName: (state) => state.user.Name,
+		userLastname: (state) => state.user.Lastname,
 	},
 	mutations: {
 		storeUser(state, user) {
@@ -22,7 +23,7 @@ export default new Vuex.Store({
 		},
 		storeFullname(state, fullname) {
 			state.user.Fullname = fullname;
-		}
+		},
 	},
 	actions: {
 		setSession({ commit }, token) {
@@ -40,6 +41,7 @@ export default new Vuex.Store({
 		destroySession({ commit }) {
 			commit("storeUser", null);
 			cookieHelper.deleteSessionCookie();
-		}
-	}
+			this.$router.go("/");
+		},
+	},
 });
