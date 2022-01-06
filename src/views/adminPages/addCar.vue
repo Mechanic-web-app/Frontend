@@ -40,10 +40,28 @@
 					text-variant="white"
 					border-variant="dark"
 				>
-					<template #header>Witaj w panelu admina</template>
+					<template #header>Lista użytkowników:</template>
 
 					<template #lead>
-						Wybierz z powyższego panelu co chciałbyś zrobić.
+						<br /><b-table
+							striped
+							hover
+							:items="users"
+							:fields="fields"
+							@row-clicked="handleRowClicked"
+						>
+							<template #cell(action)="row">
+								<b-button size="sm" @click="row.toggleDetails">
+									{{ row.detailsShowing ? "Hide" : "Show" }}
+									Details
+								</b-button>
+							</template>
+							<template #row-details>
+								<b-card>
+									<b-button>Dodaj samochód</b-button>
+								</b-card>
+							</template>
+						</b-table>
 					</template>
 				</b-jumbotron>
 			</b-card-body>
@@ -53,8 +71,52 @@
 
 <script>
 import topNavbar from "../../components/Navbar/topNavbar.vue";
+
 export default {
 	components: { topNavbar },
+	data() {
+		return {
+			users: [],
+			fields: [
+				{
+					key: "lastname",
+					sortable: true,
+					label: "Nazwisko",
+				},
+				{
+					key: "name",
+					sortable: false,
+					label: "Imię",
+				},
+				{
+					key: "action",
+					label: "Akcja",
+					sortable: false,
+				},
+			],
+		};
+	},
+	methods: {
+		async getUsers() {
+			const result = await this.$user.getUsers();
+			if (result.status === true) {
+				this.users = result.data;
+			}
+		},
+		handleRowClicked(item) {
+			this.allOpenRows.map((ele) => {
+				if (ele.id !== item.id && ele._showDetails) {
+					this.$set(ele, "_showDetails", !ele._showDetails);
+				}
+			});
+			this.allOpenRows = [];
+			this.$set(item, "_showDetails", !item._showDetails);
+			this.allOpenRows.push(item);
+		},
+	},
+	mounted() {
+		this.getUsers();
+	},
 };
 </script>
 

@@ -15,6 +15,7 @@ import App from "./App.vue";
 import cookieHelper from "./helpers/cookieHelper";
 import router from "./router";
 import authorizationService from "./services/authorizationService";
+import userService from "./services/userService.js";
 import store from "./store";
 
 Vue.use(BootstrapVue);
@@ -25,6 +26,7 @@ Vue.use(Vuesax);
 Vue.use(VueCookies);
 Vue.use(VueAxios, axios);
 Vue.use(authorizationService);
+Vue.use(userService);
 
 Vue.axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL;
 
