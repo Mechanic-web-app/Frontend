@@ -56,8 +56,9 @@
 									Details
 								</b-button>
 							</template>
-							<template #row-details>
+							<template #row-details="scope">
 								<b-card>
+									{{ scope.item.user_id }}
 									<b-button>Dodaj samochód</b-button>
 								</b-card>
 							</template>
