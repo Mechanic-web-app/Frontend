@@ -1,43 +1,33 @@
 import requestSender from "../helpers/requestSender";
 
 export default function(Vue) {
-	Vue.user = {
-		async getUsers() {
+	Vue.car = {
+		async getCars() {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Users`,
+				url: `https://localhost:44385/api/Cars`,
 			});
 			return result;
 		},
-		async addUser(request) {
+		async addCar(request) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "post",
-					url: `https://localhost:44385/api/Authentication/register`,
+					url: `https://localhost:44385/api/Cars`,
 				},
 				request,
 			);
 			return result;
 		},
-		async addEmployee(request) {
-			const result = await requestSender.sendForUsers(
-				{
-					method: "post",
-					url: `https://localhost:44385/api/Authentication/employeeRegister`,
-				},
-				request,
-			);
-			return result;
-		},
-		async getUser(id) {
+		async getCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Users/${+id}`,
+				url: `https://localhost:44385/api/Cars/${+id}`,
 			});
 			return result;
 		},
 		async updateUser(id, request) {
-			const result = await requestSender.sensendForUsersd(
+			const result = await requestSender.sendForUsers(
 				{
 					method: "put",
 					url: `https://localhost:44385/api/Users/${id}`,
@@ -46,10 +36,10 @@ export default function(Vue) {
 			);
 			return result;
 		},
-		async deleteUser(id) {
+		async deleteCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "delete",
-				url: `https://localhost:44385/api/Users/${id}`,
+				url: `https://localhost:44385/api/Cars/${id}`,
 			});
 			return result;
 		},

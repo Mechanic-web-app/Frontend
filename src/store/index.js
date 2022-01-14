@@ -16,6 +16,7 @@ export default new Vuex.Store({
 		isUser: (state) => !!state.user && state.user.Role === "User",
 		userName: (state) => state.user.Name,
 		userLastname: (state) => state.user.Lastname,
+		userId: (state) => state.user.User_id,
 	},
 	mutations: {
 		storeUser(state, user) {
@@ -27,6 +28,7 @@ export default new Vuex.Store({
 	},
 	actions: {
 		setSession({ commit }, token) {
+			console.log(token)
 			commit("storeUser", parseJwt(token));
 			cookieHelper.setSessionCookie(token);
 		},

@@ -58,7 +58,8 @@
 							</template>
 							<template #row-details>
 								<b-card>
-									<b-button>Dodaj samochód</b-button>
+									
+									<b-button @click="addCar(user.user_id)">{{user.user_id}}</b-button>
 								</b-card>
 							</template>
 						</b-table>
@@ -78,6 +79,11 @@ export default {
 		return {
 			users: [],
 			fields: [
+				{
+					key: "user_id",
+					sortable: false,
+					label:"Id"
+				},
 				{
 					key: "lastname",
 					sortable: true,
@@ -101,7 +107,10 @@ export default {
 			const result = await this.$user.getUsers();
 			if (result.status === true) {
 				this.users = result.data;
+				const users = result.data.map(user => user.user_id)
+				console.log(users);
 			}
+
 		},
 		handleRowClicked(item) {
 			this.allOpenRows.map((ele) => {
@@ -113,6 +122,9 @@ export default {
 			this.$set(item, "_showDetails", !item._showDetails);
 			this.allOpenRows.push(item);
 		},
+		async addCar(user_id){
+			console.log(user_id)
+		}
 	},
 	mounted() {
 		this.getUsers();
