@@ -1,28 +1,28 @@
 import requestSender from "../helpers/requestSender";
 
 export default function(Vue) {
-	Vue.car = {
-		async getCars() {
+	Vue.repair = {
+		async getRepairs() {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Cars`,
+				url: `https://localhost:44385/api/Repairs`,
 			});
 			return result;
 		},
-		async addCar(request) {
+		async addRepair(request) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "post",
-					url: `https://localhost:44385/api/Cars`,
+					url: `https://localhost:44385/api/Repairs`,
 				},
 				request,
 			);
 			return result;
 		},
-		async getCar(id) {
+		async getRepairsByCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Cars/byUser/${id}`,
+				url: `https://localhost:44385/api/Repairs/byCar/${id}`,
 			});
 			return result;
 		},
@@ -30,7 +30,7 @@ export default function(Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "put",
-					url: `https://localhost:44385/api/Users/${id}`,
+					url: `https://localhost:44385/api/Repairs/${id}`,
 				},
 				request,
 			);
@@ -39,15 +39,15 @@ export default function(Vue) {
 		async deleteCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "delete",
-				url: `https://localhost:44385/api/Cars/${id}`,
+				url: `https://localhost:44385/api/Repairs/${id}`,
 			});
 			return result;
 		},
 	};
 
 	Object.defineProperties(Vue.prototype, {
-		$car: {
-			get: () => Vue.car,
+		$repair: {
+			get: () => Vue.repair,
 		},
 	});
 }

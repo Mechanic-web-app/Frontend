@@ -2,6 +2,7 @@ import Vue from "vue";
 import Vuex from "vuex";
 import cookieHelper from "../helpers/cookieHelper";
 import parseJwt from "../helpers/parseJwt";
+import router from "../router";
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -17,6 +18,9 @@ export default new Vuex.Store({
 		userName: (state) => state.user.Name,
 		userLastname: (state) => state.user.Lastname,
 		userId: (state) => state.user.User_id,
+		userRole: (state) => state.user.Role,
+		userPhone: (state) => state.user.Phone_number,
+		userEmail: (state) => state.user.Email,
 	},
 	mutations: {
 		storeUser(state, user) {
@@ -28,7 +32,7 @@ export default new Vuex.Store({
 	},
 	actions: {
 		setSession({ commit }, token) {
-			console.log(token)
+			console.log(token);
 			commit("storeUser", parseJwt(token));
 			cookieHelper.setSessionCookie(token);
 		},
@@ -43,7 +47,7 @@ export default new Vuex.Store({
 		destroySession({ commit }) {
 			commit("storeUser", null);
 			cookieHelper.deleteSessionCookie();
-			this.$router.go("/");
+			router.push({ name: "mainPage" });
 		},
 	},
 });

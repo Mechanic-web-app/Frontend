@@ -57,9 +57,57 @@
 								</b-button>
 							</template>
 							<template #row-details="scope">
-								<b-card>
-									{{scope.item.user_id}}
-									<b-button @click="addCar(user.user_id)">{{user.user_id}}</b-button>
+								<b-card style="background:white;!important">
+									<el-form
+										:model="addedCar"
+										status-icon
+										:rules="rules"
+										ref="addedCar"
+									>
+										<el-form-item
+											label="Brand"
+											prop="brand"
+										>
+											<el-input
+												type="brand"
+												v-model="addedCar.brand"
+												autocomplete="off"
+											></el-input>
+										</el-form-item>
+										<el-form-item
+											label="Model"
+											prop="model"
+										>
+											<el-input
+												type="model"
+												v-model="addedCar.model"
+												autocomplete="off"
+											></el-input>
+										</el-form-item>
+										<el-form-item
+											label="Registration number"
+											prop="regNumber"
+										>
+											<el-input
+												type="regNumber"
+												v-model="addedCar.regNumber"
+												autocomplete="off"
+											></el-input>
+										</el-form-item>
+									</el-form>
+									<br />
+									<b-button
+										@click="
+											addCar(
+												addedCar.brand,
+												addedCar.model,
+												addedCar.regNumber,
+												scope.item.user_id,
+											)
+										"
+									>
+										Add Car
+									</b-button>
 								</b-card>
 							</template>
 						</b-table>
@@ -76,14 +124,36 @@ import topNavbar from "../../components/Navbar/topNavbar.vue";
 export default {
 	components: { topNavbar },
 	data() {
+		var validateBrand = (rule, value, callback) => {
+			if (value === "") {
+				callback(new Error("Proszę wprowadzić email"));
+			} else {
+				callback();
+			}
+		};
+		var validateModel = (rule, value, callback) => {
+			if (value === "") {
+				callback(new Error("Proszę wprowadzić email"));
+			} else {
+				callback();
+			}
+		};
+		var validateRegNumber = (rule, value, callback) => {
+			if (value === "") {
+				callback(new Error("Proszę wprowadzić email"));
+			} else {
+				callback();
+			}
+		};
 		return {
 			users: [],
+			addedCar: {
+				brand: "",
+				model: "",
+				regNumber: "",
+				userId: "",
+			},
 			fields: [
-				{
-					key: "user_id",
-					sortable: false,
-					label:"Id"
-				},
 				{
 					key: "lastname",
 					sortable: true,
@@ -100,6 +170,11 @@ export default {
 					sortable: false,
 				},
 			],
+			rules: {
+				brand: [{ validator: validateBrand, trigger: "blur" }],
+				model: [{ validator: validateModel, trigger: "blur" }],
+				regNumber: [{ validator: validateRegNumber, trigger: "blur" }],
+			},
 		};
 	},
 	methods: {
@@ -107,10 +182,8 @@ export default {
 			const result = await this.$user.getUsers();
 			if (result.status === true) {
 				this.users = result.data;
-				const users = result.data.map(user => user.user_id)
-				console.log(users);
+				console.log(this.users);
 			}
-
 		},
 		handleRowClicked(item) {
 			this.allOpenRows.map((ele) => {
@@ -122,9 +195,23 @@ export default {
 			this.$set(item, "_showDetails", !item._showDetails);
 			this.allOpenRows.push(item);
 		},
-		async addCar(user_id){
-			console.log(user_id)
-		}
+		async addCar(brand, model, regNumber, user_id) {
+			//let isValidForm = true;
+			console.log(brand, model, regNumber, user_id);
+			/*if (isValidForm) {
+				const result = await this.$car.addCar({
+					car_brand: brand,
+					car_model: model,
+					car_reg_number: regNumber,
+					car_user_id: user_id,
+				});
+
+				if (result.status === true) {
+					alert("Samochód dodany pomyślnie");
+					this.$router.push({ name: "addCar" });
+				}
+			}*/
+		},
 	},
 	mounted() {
 		this.getUsers();
@@ -137,6 +224,6 @@ export default {
 	background: #363636;
 }
 .card-body {
-	background: #464646;
+	background: #bdbdbd;
 }
 </style>

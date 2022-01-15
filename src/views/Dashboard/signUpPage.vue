@@ -159,13 +159,12 @@ export default {
 						"Rejestracja przebiegła pomyślnie, poczekaj aż twoje konto zostanie aktywowane przez pracownika",
 					);
 					this.$router.push({ name: "mainPage" });
-					
 				}
 			}
 		},
-	},
-	resetForm(regForm) {
-		this.$refs[regForm].resetFields();
+		resetForm(regForm) {
+			this.$refs[regForm].resetFields();
+		},
 	},
 };
 </script>

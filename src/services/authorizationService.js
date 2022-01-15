@@ -25,6 +25,16 @@ export default function(Vue) {
 			);
 			return result;
 		},
+		async registerByAdmin(registerRequest) {
+			const result = await requestSender.send(
+				{
+					method: "post",
+					url: `https://localhost:44385/api/authentication/registerByAdmin`,
+				},
+				registerRequest,
+			);
+			return result;
+		},
 		async activateAccount(request) {
 			const result = await requestSender.send(
 				{
