@@ -26,16 +26,6 @@ export default function(Vue) {
 			});
 			return result;
 		},
-		async updateUser(id, request) {
-			const result = await requestSender.sendForUsers(
-				{
-					method: "put",
-					url: `https://localhost:44385/api/Users/${id}`,
-				},
-				request,
-			);
-			return result;
-		},
 		async deleteCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "delete",

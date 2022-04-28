@@ -128,6 +128,7 @@ export default {
 			if (value === "") {
 				callback(new Error("Proszę wprowadzić email"));
 			} else {
+				this.isBrand = true;
 				callback();
 			}
 		};
@@ -135,6 +136,7 @@ export default {
 			if (value === "") {
 				callback(new Error("Proszę wprowadzić email"));
 			} else {
+				this.isModel = true;
 				callback();
 			}
 		};
@@ -142,6 +144,7 @@ export default {
 			if (value === "") {
 				callback(new Error("Proszę wprowadzić email"));
 			} else {
+				this.isRegNumber = true;
 				callback();
 			}
 		};
@@ -153,6 +156,10 @@ export default {
 				regNumber: "",
 				userId: "",
 			},
+			isBrand: false,
+			isModel: false,
+			isRegNumber: false,
+			isValidForm: false,
 			fields: [
 				{
 					key: "lastname",
@@ -196,21 +203,24 @@ export default {
 			this.allOpenRows.push(item);
 		},
 		async addCar(brand, model, regNumber, user_id) {
-			//let isValidForm = true;
-			console.log(brand, model, regNumber, user_id);
-			/*if (isValidForm) {
-				const result = await this.$car.addCar({
-					car_brand: brand,
-					car_model: model,
-					car_reg_number: regNumber,
-					car_user_id: user_id,
-				});
+			if (this.isBrand && this.isModel && this.isRegNumber) {
+				this.isValidForm = true;
+				if (this.isValidForm) {
+					const result = await this.$car.addCar({
+						car_brand: brand,
+						car_model: model,
+						car_reg_number: regNumber,
+						car_user_id: user_id,
+					});
 
-				if (result.status === true) {
-					alert("Samochód dodany pomyślnie");
-					this.$router.push({ name: "addCar" });
+					if (result.status === true) {
+						alert("Samochód dodany pomyślnie");
+						this.$router.push({ name: "addCar" });
+					}
 				}
-			}*/
+			} else {
+				alert("Proszę uzupełnić wszystkie pola");
+			}
 		},
 	},
 	mounted() {

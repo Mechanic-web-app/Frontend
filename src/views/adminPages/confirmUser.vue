@@ -31,6 +31,7 @@
 					>
 				</b-nav>
 			</b-card-header>
+
 			<b-card-body
 				class="text-center"
 				style="max-width: 110rem; margin:auto;"
@@ -40,10 +41,24 @@
 					text-variant="white"
 					border-variant="dark"
 				>
-					<template #header>Witaj w panelu admina</template>
+					<template #header>Lista użytkowników:</template>
 
 					<template #lead>
-						Wybierz z powyższego panelu co chciałbyś zrobić.
+						<br /><b-table
+							striped
+							hover
+							:items="unactiveUsers"
+							:fields="fields"
+						>
+							<template #cell(action)="data">
+								<b-button
+									@click="confirmUser(data.item.user_id)"
+								>
+									Add Car
+								</b-button>
+							</template>
+							<template> </template>
+						</b-table>
 					</template>
 				</b-jumbotron>
 			</b-card-body>
@@ -55,6 +70,51 @@
 import topNavbar from "../../components/Navbar/topNavbar.vue";
 export default {
 	components: { topNavbar },
+	data() {
+		return {
+			unactiveUsers: [],
+			fields: [
+				{
+					key: "lastname",
+					sortable: true,
+					label: "Nazwisko",
+				},
+				{
+					key: "name",
+					sortable: false,
+					label: "Imię",
+				},
+				{
+					key: "action",
+					label: "Akcja",
+					sortable: false,
+				},
+			],
+		};
+	},
+	methods: {
+		async getUnactiveUsers() {
+			const result = await this.$user.getUnactiveUsers();
+			if (result.status === true) {
+				this.unactiveUsers = result.data;
+			}
+		},
+		async confirmUser(id) {
+			{
+				const result = await this.$user.confirmUser(id, {
+					user_confirmed: true,
+				});
+
+				if (result.status === true) {
+					alert("Pomyślnie aktywowano użytkownika");
+					this.$router.go();
+				}
+			}
+		},
+	},
+	mounted() {
+		this.getUnactiveUsers();
+	},
 };
 </script>
 

@@ -36,8 +36,9 @@ export default function(Vue) {
 			});
 			return result;
 		},
-		async updateUser(id, request) {
-			const result = await requestSender.sensendForUsersd(
+		async confirmUser(id, request) {
+			console.log(id);
+			const result = await requestSender.sendForUsers(
 				{
 					method: "put",
 					url: `https://localhost:44385/api/Users/${id}`,
@@ -50,6 +51,13 @@ export default function(Vue) {
 			const result = await requestSender.sendForUsers({
 				method: "delete",
 				url: `https://localhost:44385/api/Users/${id}`,
+			});
+			return result;
+		},
+		async getUnactiveUsers() {
+			const result = await requestSender.sendForUsers({
+				method: "get",
+				url: `https://localhost:44385/api/Users/byNotConfirmed/false`,
 			});
 			return result;
 		},
