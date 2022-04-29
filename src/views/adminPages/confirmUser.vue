@@ -54,7 +54,7 @@
 								<b-button
 									@click="confirmUser(data.item.user_id)"
 								>
-									Add Car
+									Zatwierdź użytkownika
 								</b-button>
 							</template>
 							<template> </template>

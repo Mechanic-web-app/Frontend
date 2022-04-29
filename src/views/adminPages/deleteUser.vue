@@ -40,10 +40,23 @@
 					text-variant="white"
 					border-variant="dark"
 				>
-					<template #header>Witaj w panelu admina</template>
+					<template #header> Lista użytkowników: </template>
 
 					<template #lead>
-						Wybierz z powyższego panelu co chciałbyś zrobić.
+						<br /><b-table
+							striped
+							hover
+							:items="users"
+							:fields="fields"
+						>
+							<template #cell(action)="data">
+								<b-button
+									@click="deleteUser(data.item.user_id)"
+								>
+									Usuń użytkownika
+								</b-button>
+							</template>
+						</b-table>
 					</template>
 				</b-jumbotron>
 			</b-card-body>
@@ -53,8 +66,58 @@
 
 <script>
 import topNavbar from "../../components/Navbar/topNavbar.vue";
+
 export default {
 	components: { topNavbar },
+	data() {
+		return {
+			users: [],
+			fields: [
+				{
+					key: "lastname",
+					sortable: true,
+					label: "Nazwisko",
+				},
+				{
+					key: "name",
+					sortable: false,
+					label: "Imię",
+				},
+				{
+					key: "email",
+					sortable: true,
+					label: "E-mail",
+				},
+				{
+					key: "action",
+					label: "Akcja",
+					sortable: false,
+				},
+			],
+		};
+	},
+	methods: {
+		async getUsers() {
+			const result = await this.$user.getUsers();
+			if (result.status === true) {
+				this.users = result.data;
+				console.log(this.users);
+			}
+		},
+		async deleteUser(id) {
+			{
+				const result = await this.$user.deleteUser(id);
+
+				if (result.status === true) {
+					alert("Pomyślnie usunięto użytkownika");
+					this.$router.go();
+				}
+			}
+		},
+	},
+	mounted() {
+		this.getUsers();
+	},
 };
 </script>
 
@@ -63,6 +126,6 @@ export default {
 	background: #363636;
 }
 .card-body {
-	background: #464646;
+	background: #bdbdbd;
 }
 </style>
