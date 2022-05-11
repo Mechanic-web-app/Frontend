@@ -8,6 +8,8 @@ import confirmUser from "./views/adminPages/confirmUser.vue";
 import deleteOpinion from "./views/adminPages/deleteOpinion.vue";
 import deleteUser from "./views/adminPages/deleteUser.vue";
 import mainPage from "./views/Dashboard/mainPage.vue";
+import makeAppointment from "./views/Dashboard/makeAppointment.vue";
+import mechanicBotPage from "./views/Dashboard/mechanicBotPage.vue";
 import signInPage from "./views/Dashboard/signInPage.vue";
 import signUpPage from "./views/Dashboard/signUpPage.vue";
 import employeeAddCar from "./views/employeePages/employeeAddCar.vue";
@@ -93,6 +95,16 @@ const router = new VueRouter({
 			path: "/employee/confirm-user",
 			name: "employeeConfirmUser",
 			component: employeeConfirmUser,
+		},
+		{
+			path: "/wizyta",
+			name: "makeAppointment",
+			component: makeAppointment,
+		},
+		{
+			path: "/diagnostyka",
+			name: "mechanicBotPage",
+			component: mechanicBotPage,
 		},
 	],
 });

@@ -1,6 +1,7 @@
 <template>
 	<div>
 		<router-view />
+		<Footer></Footer>
 	</div>
 </template>
 
@@ -8,7 +9,11 @@
 import { mapGetters, mapActions } from "vuex";
 import cookieHelper from "./helpers/cookieHelper";
 import roleRedirect from "./helpers/roleRedirect";
+import Footer from "./components/Footer/footer.vue";
 export default {
+	components: {
+		Footer,
+	},
 	computed: {
 		...mapGetters(["isAdmin", "isEmployee", "isUser", "isLogged"]),
 		hasToken() {
@@ -44,6 +49,9 @@ export default {
 	src: url("./assets/fonts/Roboto-Regular.ttf");
 }
 body {
-	background-color: #121212;
+	background-color: #2e2e2e;
+}
+a:link {
+	text-decoration: none;
 }
 </style>

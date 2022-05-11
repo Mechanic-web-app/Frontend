@@ -13,6 +13,7 @@ import Vuesax from "vuesax";
 import "vuesax/dist/vuesax.css";
 import App from "./App.vue";
 import cookieHelper from "./helpers/cookieHelper";
+import "./index.css";
 import router from "./router";
 import authorizationService from "./services/authorizationService";
 import carService from "./services/carService";

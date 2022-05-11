@@ -1,14 +1,17 @@
 <template>
 	<div>
 		<top-navbar></top-navbar>
-		<b-container fluid style="margin-top:50px;">
+		<b-container fluid style="margin-top: 50px">
 			<b-card-header
-				style="max-width: 110rem; margin:auto;"
+				style="max-width: 110rem; margin: auto;"
 				class="mb-2"
 				header-tag="nav"
 			>
 				<b-nav card-header pills>
-					<b-nav-item to="/admin/menu">
+					<b-nav-item
+						to="/admin/menu"
+						class="text-white font-semibold"
+					>
 						Panel główny
 					</b-nav-item>
 					<b-nav-item to="/admin/add-employee" active>
@@ -18,11 +21,9 @@
 						Zatwierdź użytkowników
 					</b-nav-item>
 					<b-nav-item to="/admin/delete-user">
-						Usuń użytkownika</b-nav-item
-					>
-					<b-nav-item to="/admin/add-car">
-						Dodaj samochód do użytkownika
+						Usuń użytkownika
 					</b-nav-item>
+					<b-nav-item> Dodaj samochód do użytkownika </b-nav-item>
 					<b-nav-item to="/admin/add-repair">
 						Dodaj naprawę
 					</b-nav-item>
@@ -33,15 +34,14 @@
 			</b-card-header>
 			<b-card-body
 				class="text-center"
-				style="max-width: 110rem; margin:auto;"
+				style="max-width: 110rem; margin: auto"
 			>
 				<b-jumbotron
-					bg-variant="secondary"
+					bg-variant="primary"
 					text-variant="white"
 					border-variant="dark"
 				>
-					<template #header>Witaj w panelu admina</template>
-
+					<template #header> Witaj w panelu admina </template>
 					<template #lead>
 						<div class="container">
 							<el-form
@@ -51,6 +51,7 @@
 								ref="regForm"
 								label-width="120px"
 								class="demo-ruleForm"
+								style="margin-top: 20px; color: black"
 							>
 								<el-form-item label="Email" prop="email">
 									<el-input
@@ -232,14 +233,14 @@ export default {
 </script>
 
 <style scoped>
-.card-header {
-	background: #363636;
-}
-.card-body {
-	background: #bdbdbd;
-}
-label.el-form-item__label {
-	color: black !important;
+.el-form {
+	color: rgb(255, 0, 0) !important;
 	font-weight: bold !important;
+}
+a {
+	color: grey !important;
+}
+.card-header {
+	background: #313131;
 }
 </style>

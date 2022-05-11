@@ -1,7 +1,7 @@
 <template>
 	<div>
 		<top-navbar></top-navbar>
-		<div style="background:white;">
+		<div>
 			WITAJ NA STRONIE WARSZTATU
 		</div>
 	</div>

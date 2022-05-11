@@ -120,7 +120,7 @@ export default {
 
 <style scoped>
 .card-header {
-	background: #363636;
+	background: #707070;
 }
 .card-body {
 	background: #464646;
