@@ -7,13 +7,17 @@ import adminMenu from "./views/adminPages/adminMenu.vue";
 import confirmUser from "./views/adminPages/confirmUser.vue";
 import deleteOpinion from "./views/adminPages/deleteOpinion.vue";
 import deleteUser from "./views/adminPages/deleteUser.vue";
+import aboutUsPage from "./views/Dashboard/aboutUsPage.vue";
+import contactPage from "./views/Dashboard/contactPage.vue";
 import mainPage from "./views/Dashboard/mainPage.vue";
 import makeAppointment from "./views/Dashboard/makeAppointment.vue";
 import mechanicBotPage from "./views/Dashboard/mechanicBotPage.vue";
+import servicesPage from "./views/Dashboard/servicesPage.vue";
 import signInPage from "./views/Dashboard/signInPage.vue";
 import signUpPage from "./views/Dashboard/signUpPage.vue";
 import employeeAddCar from "./views/employeePages/employeeAddCar.vue";
 import employeeAddRepair from "./views/employeePages/employeeAddRepair.vue";
+import employeeChat from "./views/employeePages/employeeChat.vue";
 import employeeConfirmUser from "./views/employeePages/employeeConfirmUser.vue";
 import employeeMenu from "./views/employeePages/employeeMenu.vue";
 import userProfile from "./views/userPages/userProfile.vue";
@@ -30,6 +34,21 @@ const router = new VueRouter({
 			path: "/",
 			name: "mainPage",
 			component: mainPage,
+		},
+		{
+			path: "/o-nas",
+			name: "aboutUs",
+			component: aboutUsPage,
+		},
+		{
+			path: "/uslugi",
+			name: "services",
+			component: servicesPage,
+		},
+		{
+			path: "/kontakt",
+			name: "contact",
+			component: contactPage,
 		},
 		{
 			path: "/sign-in",
@@ -95,6 +114,11 @@ const router = new VueRouter({
 			path: "/employee/confirm-user",
 			name: "employeeConfirmUser",
 			component: employeeConfirmUser,
+		},
+		{
+			path: "/employee/chat",
+			name: "employeeChat",
+			component: employeeChat,
 		},
 		{
 			path: "/wizyta",

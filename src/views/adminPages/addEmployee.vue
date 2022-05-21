@@ -3,34 +3,38 @@
 		<top-navbar></top-navbar>
 		<b-container fluid style="margin-top: 50px">
 			<b-card-header
-				style="max-width: 110rem; margin: auto;"
+				style="max-width: 110rem; margin: auto"
 				class="mb-2"
 				header-tag="nav"
 			>
-				<b-nav card-header pills>
-					<b-nav-item
-						to="/admin/menu"
-						class="text-white font-semibold"
-					>
-						Panel główny
-					</b-nav-item>
-					<b-nav-item to="/admin/add-employee" active>
-						Dodaj pracownika
-					</b-nav-item>
-					<b-nav-item to="/admin/confirm-user">
-						Zatwierdź użytkowników
-					</b-nav-item>
-					<b-nav-item to="/admin/delete-user">
-						Usuń użytkownika
-					</b-nav-item>
-					<b-nav-item> Dodaj samochód do użytkownika </b-nav-item>
-					<b-nav-item to="/admin/add-repair">
-						Dodaj naprawę
-					</b-nav-item>
-					<b-nav-item to="/admin/delete-opinion">
-						Usuń opinię</b-nav-item
-					>
-				</b-nav>
+				<b-navbar toggleable="lg" card-header pills>
+					<b-navbar-toggle target="adminNav"></b-navbar-toggle>
+					<b-collapse id="adminNav" is-nav>
+						<b-navbar-nav>
+							<b-nav-item to="/admin/menu">
+								Panel główny
+							</b-nav-item>
+							<b-nav-item to="/admin/add-employee" active>
+								Dodaj pracownika
+							</b-nav-item>
+							<b-nav-item to="/admin/confirm-user">
+								Zatwierdź użytkowników
+							</b-nav-item>
+							<b-nav-item to="/admin/delete-user">
+								Usuń użytkownika</b-nav-item
+							>
+							<b-nav-item to="/admin/add-car">
+								Dodaj samochód do użytkownika
+							</b-nav-item>
+							<b-nav-item to="/admin/add-repair">
+								Dodaj naprawę
+							</b-nav-item>
+							<b-nav-item to="/admin/delete-opinion">
+								Usuń opinię
+							</b-nav-item>
+						</b-navbar-nav>
+					</b-collapse>
+				</b-navbar>
 			</b-card-header>
 			<b-card-body
 				class="text-center"
@@ -232,15 +236,9 @@ export default {
 };
 </script>
 
-<style scoped>
+<style>
 .el-form {
 	color: rgb(255, 0, 0) !important;
 	font-weight: bold !important;
-}
-a {
-	color: grey !important;
-}
-.card-header {
-	background: #313131;
 }
 </style>

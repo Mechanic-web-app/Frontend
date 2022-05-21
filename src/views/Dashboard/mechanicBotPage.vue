@@ -8,14 +8,18 @@
 		>
 			<b-container>
 				<b-row style="height: 100%">
-					<b-col cols="4" style="display: flex; align-items: center">
+					<b-col
+						cols="12"
+						md="4"
+						class="d-flex align-items-center justify-content-center"
+					>
 						<img
 							src="../../assets/bot.svg"
 							style="width: 40vh"
 							alt=""
 						/>
 					</b-col>
-					<b-col cols="8" class="qaCol">
+					<b-col cols="12" md="8" class="qaCol">
 						<div v-if="!isStarted">
 							<h1>
 								Witaj! Z tej strony BOT Diagnosta.<br />
@@ -1019,6 +1023,7 @@
 	</div>
 </template>
 <script>
+import { mapGetters } from "vuex";
 import topNavbar from "../../components/Navbar/topNavbar.vue";
 export default {
 	data() {
@@ -1051,6 +1056,9 @@ export default {
 			q25: null,
 			q26: null,
 		};
+	},
+	computed: {
+		...mapGetters(["isAdmin", "isEmployee", "isUser", "isLogged"]),
 	},
 	components: {
 		topNavbar,
@@ -1242,34 +1250,51 @@ export default {
 			}
 		},
 		diagnosticReset() {
-			console.log("dupa");
-			this.q1 == null;
-			this.q2 == null;
-			this.q3 == null;
-			this.q4 == null;
-			this.q5 == null;
-			this.q6 == null;
-			this.q7 == null;
-			this.q8 == null;
-			this.q9 == null;
-			this.q10 == null;
-			this.q11 == null;
-			this.q12 == null;
-			this.q13 == null;
-			this.q14 == null;
-			this.q15 == null;
-			this.q16 == null;
-			this.q17 == null;
-			this.q18 == null;
-			this.q19 == null;
-			this.q20 == null;
-			this.q21 == null;
-			this.q22 == null;
-			this.q23 == null;
-			this.q24 == null;
-			this.q25 == null;
-			this.q26 == null;
+			this.q1 = null;
+			this.q2 = null;
+			this.q3 = null;
+			this.q4 = null;
+			this.q5 = null;
+			this.q6 = null;
+			this.q7 = null;
+			this.q8 = null;
+			this.q9 = null;
+			this.q10 = null;
+			this.q11 = null;
+			this.q12 = null;
+			this.q13 = null;
+			this.q14 = null;
+			this.q15 = null;
+			this.q16 = null;
+			this.q17 = null;
+			this.q18 = null;
+			this.q19 = null;
+			this.q20 = null;
+			this.q21 = null;
+			this.q22 = null;
+			this.q23 = null;
+			this.q24 = null;
+			this.q25 = null;
+			this.q26 = null;
 		},
+
+		employeeChatObserver() {
+			if (this.isEmployee) {
+				this.connect();
+				this.$chatHub.$on(
+					"push-notification",
+					(userName, userLastname) => {
+						alert(
+							userName + " " + userLastname + " wysłał wiadomość",
+						);
+					},
+				);
+				console.log("Employee connected to hub");
+			}
+		},
+	},
+	mounted() {
+		this.employeeChatObserver();
 	},
 };
 </script>
@@ -1284,6 +1309,9 @@ export default {
 }
 .qaCol {
 	text-align: center;
-	font-size: 2.5em;
+	margin-top: 15vh;
+}
+.qaCol h1 {
+	font-size: 3vh;
 }
 </style>

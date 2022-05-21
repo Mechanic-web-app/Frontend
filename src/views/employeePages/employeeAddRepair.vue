@@ -1,30 +1,36 @@
 <template>
 	<div>
 		<top-navbar></top-navbar>
-		<b-container fluid style="margin-top:50px;">
+		<b-container fluid style="margin-top: 50px">
 			<b-card-header
-				style="max-width: 110rem; margin:auto;"
+				style="max-width: 110rem; margin: auto"
 				class="mb-2"
 				header-tag="nav"
 			>
-				<b-nav card-header pills>
-					<b-nav-item to="/employee/menu">
-						Panel główny
-					</b-nav-item>
-					<b-nav-item to="/employee/confirm-user">
-						Zatwierdź użytkowników
-					</b-nav-item>
-					<b-nav-item to="/employee/add-car">
-						Dodaj samochód do użytkownika
-					</b-nav-item>
-					<b-nav-item to="/employee/add-repair" active>
-						Dodaj naprawę
-					</b-nav-item>
-				</b-nav>
+				<b-navbar toggleable="lg" card-header pills>
+					<b-navbar-toggle target="employeeNav"></b-navbar-toggle>
+					<b-collapse id="employeeNav" is-nav>
+						<b-navbar-nav>
+							<b-nav-item to="/employee/menu">
+								Panel główny
+							</b-nav-item>
+							<b-nav-item to="/employee/confirm-user">
+								Zatwierdź użytkowników
+							</b-nav-item>
+							<b-nav-item to="/employee/add-car">
+								Dodaj samochód do użytkownika
+							</b-nav-item>
+							<b-nav-item to="/employee/add-repair" active>
+								Dodaj naprawę
+							</b-nav-item>
+							<b-nav-item to="/employee/chat"> Czat </b-nav-item>
+						</b-navbar-nav>
+					</b-collapse>
+				</b-navbar>
 			</b-card-header>
 			<b-card-body
 				class="text-center"
-				style="max-width: 110rem; margin:auto;"
+				style="max-width: 110rem; margin: auto"
 			>
 				<b-jumbotron
 					bg-variant="primary"
@@ -74,7 +80,7 @@
 												autocomplete="off"
 												controls-position="right"
 												:step="0.01"
-												style="width:100%;"
+												style="width: 100%"
 											></el-input-number>
 										</el-form-item>
 										<el-form-item label="Date" prop="date">
@@ -110,6 +116,7 @@
 
 <script>
 import topNavbar from "../../components/Navbar/topNavbar.vue";
+import { mapGetters } from "vuex";
 export default {
 	data() {
 		var validateDescription = (rule, value, callback) => {
@@ -171,6 +178,9 @@ export default {
 			},
 		};
 	},
+	computed: {
+		...mapGetters(["isAdmin", "isEmployee", "isUser", "isLogged"]),
+	},
 	components: { topNavbar },
 	methods: {
 		async getCars() {
@@ -206,9 +216,24 @@ export default {
 				}
 			}
 		},
+		employeeChatObserver() {
+			if (this.isEmployee) {
+				this.connect();
+				this.$chatHub.$on(
+					"push-notification",
+					(userName, userLastname) => {
+						alert(
+							userName + " " + userLastname + " wysłał wiadomość",
+						);
+					},
+				);
+				console.log("Employee connected to hub");
+			}
+		},
 	},
 	mounted() {
 		this.getCars();
+		this.employeeChatObserver();
 	},
 };
 </script>
@@ -218,6 +243,6 @@ export default {
 	background: #363636;
 }
 .card-body {
-	background: #bdbdbd;
+	background: #464646;
 }
 </style>

@@ -32,7 +32,6 @@ export default {
 				this.restoreSession(newVal);
 				console.log(newVal);
 			} else {
-				console.log("dupa");
 				this.$router.push({ name: "Login" });
 			}
 		},

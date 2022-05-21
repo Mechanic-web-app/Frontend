@@ -4,7 +4,7 @@
 			<b-navbar-brand>
 				<img
 					src="../../assets/car-logo.svg"
-					style="width: 15vh"
+					style="width: 10vw"
 					alt=""
 				/>
 			</b-navbar-brand>
@@ -14,11 +14,13 @@
 			<b-collapse id="nav-collapse" is-nav>
 				<b-navbar-nav>
 					<b-nav-item to="/"> Strona główna </b-nav-item>
-					<b-nav-item>Usługi</b-nav-item>
-					<b-nav-item>O nas</b-nav-item>
+					<b-nav-item to="/uslugi">Usługi</b-nav-item>
+					<b-nav-item to="/o-nas">O nas</b-nav-item>
 					<b-nav-item to="/diagnostyka">BOT Diagnosta </b-nav-item>
-					<b-nav-item>Kontakt</b-nav-item>
-					<b-nav-item to="/wizyta">Umów się na wizytę</b-nav-item>
+					<b-nav-item to="/kontakt">Kontakt</b-nav-item>
+					<b-nav-item to="/wizyta" v-if="!isEmployee">
+						Umów się na wizytę
+					</b-nav-item>
 				</b-navbar-nav>
 
 				<b-navbar-nav class="ml-auto" v-if="isLogged">
