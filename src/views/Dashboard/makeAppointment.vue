@@ -31,16 +31,30 @@
 					Witaj, podaj swoje imię i nazwisko, poczym naciśnij start,
 					jeśli chcesz zacząć rozmowę
 				</h1>
-				<b-form-input
-					v-model="unloggedUserName"
-					placeholder="Wprowadź swoje imię"
-					class="chatEntryInput"
-				></b-form-input>
-				<b-form-input
-					v-model="text"
-					placeholder="Wprowadź swoje nazwisko"
-					class="chatEntryInput"
-				></b-form-input>
+					<el-form
+					:model="chatForm"
+					status-icon
+					:rules="rules"
+					ref="chatForm"
+					label-width="120px"
+					class="demo-ruleForm"
+					>
+					<el-form-item label="Imię" prop="name">
+						<el-input
+							type="text"
+							v-model="chatForm.name"
+							autocomplete="off"
+						></el-input>
+					</el-form-item>
+					<el-form-item label="Nazwisko" prop="lastname">
+						<el-input
+							type="text"
+							v-model="chatForm.lastname"
+							autocomplete="off"
+						>
+						</el-input>
+					</el-form-item>
+				</el-form>
 				<b-button
 					variant="light"
 					style="margin-top: 1em"
@@ -84,9 +98,18 @@
 								>
 								</b-form-textarea>
 								<b-button
+								v-if="isLogged"
 									variant="light"
 									class="sendBtn"
-									@click="sendMessage"
+									@click="sendMessage(true)"
+								>
+									Wyślij
+								</b-button>
+								<b-button
+								v-else
+									variant="light"
+									class="sendBtn"
+									@click="sendMessage(false)"
 								>
 									Wyślij
 								</b-button>
@@ -100,17 +123,39 @@
 </template>
 <script>
 import { mapGetters } from "vuex";
+  import { uuid } from 'vue-uuid';
 import topNavbar from "../../components/Navbar/topNavbar.vue";
 export default {
 	data() {
+		var validateName = (rule, value, callback) => {
+			if (value === "") {
+				callback(new Error("Wprowadź imię!"));
+			} else {
+				callback();
+			}
+		};
+		var validateLastname = (rule, value, callback) => {
+			if (value === "") {
+				callback(new Error("Wprowadź nazwisko!"));
+			} else {
+				callback();
+			}
+		};
 		return {
-			unloggedUserName: "",
-			unloggedUserLastname: "",
 			unloggedUserId: "",
 			chatStarted: false,
 			chatMessage: "",
 			messages: [],
-		};
+			chatForm: {
+				name: "",
+				lastname: "",
+			},
+			rules: {
+				name: [{ validator: validateName, trigger: "blur" }],
+				lastname: [{ validator: validateLastname, trigger: "blur" }],
+			},
+			uuid: uuid.v1(),
+		}
 	},
 	components: {
 		topNavbar,
@@ -131,10 +176,23 @@ export default {
 		async startChat(logged) {
 			if (this.$connection.connection.connectionState === 1) {
 				if (logged === false) {
-					console.log("unlogged");
+					this.unloggedUserId = this.uuid;
+					console.log(this.unloggedUserId, this.chatForm.name, this.chatForm.lastname)
+					await this.$connection.invoke(
+					"ConnectToChatRoom",
+					{
+						Room_id: this.unloggedUserId,
+						RoomName: this.chatForm.name + " " + this.chatForm.lastname,
+					},
+					{
+						CallerId: this.unloggedUserId,
+						CallerName: this.chatForm.name,
+						CallerLastname: this.chatForm.lastname,
+					},
+				);
 				}
-				console.log(this.$connection.connection);
-				await this.$connection.invoke(
+				else{
+					await this.$connection.invoke(
 					"ConnectToChatRoom",
 					{
 						Room_id: this.userId,
@@ -146,13 +204,14 @@ export default {
 						CallerLastname: this.userLastname,
 					},
 				);
+				}
 				this.chatStarted = true;
-				console.log(this.userId);
 			}
 		},
-		async sendMessage() {
+		async sendMessage(logged) {
 			if (this.$connection.connection.connectionState === 1) {
-				await this.$connection.invoke("SendMessage", {
+				if (logged === true){
+					await this.$connection.invoke("SendMessage", {
 					Room_id: this.userId,
 					MessageSender: this.userId,
 					MessageReceiver: "46bccddb-c0ed-47f5-093f-08da36743cbf",
@@ -160,6 +219,17 @@ export default {
 					UserLastname: this.userLastname,
 					MessageContext: this.chatMessage,
 				});
+				}
+				else{
+					await this.$connection.invoke("SendMessage", {
+					Room_id: this.unloggedUserId,
+					MessageSender: this.unloggedUserId,
+					MessageReceiver: "46bccddb-c0ed-47f5-093f-08da36743cbf",
+					UserName: this.chatForm.name,
+					UserLastname: this.chatForm.lastname,
+					MessageContext: this.chatMessage,
+				});
+				}
 				this.chatMessage = "";
 				console.log(this.messages);
 			}
@@ -197,6 +267,11 @@ export default {
 .chatEntryInput {
 	width: 25%;
 	margin: 1em auto 0 auto;
+}
+.chatEntry .el-form-item {
+    margin-bottom: 22px;
+    width: 30% !important;
+    margin: 5vh auto 2vh auto;
 }
 .chat {
 	width: 100%;

@@ -37,7 +37,7 @@ Vue.use(repairService);
 Vue.use(chatService);
 Vue.use(chatRoomService);
 Vue.use(chatHub);
-vue.use({uuid})
+Vue.use({uuid})
 
 Vue.filter("formatDate", function (value) {
 	if (value) {
