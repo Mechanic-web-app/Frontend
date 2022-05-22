@@ -22,6 +22,7 @@ import chatService from "./services/chatService.js";
 import repairService from "./services/repairService.js";
 import userService from "./services/userService.js";
 import store from "./store";
+import { uuid }	from "vue-uuid"
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -36,6 +37,7 @@ Vue.use(repairService);
 Vue.use(chatService);
 Vue.use(chatRoomService);
 Vue.use(chatHub);
+vue.use({uuid})
 
 Vue.filter("formatDate", function (value) {
 	if (value) {
