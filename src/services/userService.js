@@ -1,11 +1,11 @@
 import requestSender from "../helpers/requestSender";
 
-export default function(Vue) {
+export default function (Vue) {
 	Vue.user = {
 		async getUsers() {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Users`,
+				url: `https://localhost:44385/api/Users/`,
 			});
 			return result;
 		},
@@ -42,6 +42,17 @@ export default function(Vue) {
 				{
 					method: "put",
 					url: `https://localhost:44385/api/Users/${id}`,
+				},
+				request,
+			);
+			return result;
+		},
+		async profileUpdate(id, request) {
+			console.log(id);
+			const result = await requestSender.sendForUsers(
+				{
+					method: "put",
+					url: `https://localhost:44385/api/Users/profileUpdate/${id}`,
 				},
 				request,
 			);

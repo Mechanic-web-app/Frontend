@@ -13,37 +13,26 @@
             <b-navbar-nav>
               <b-nav-item to="/admin/menu"> Panel główny </b-nav-item>
               <b-nav-item to="/admin/add-employee"> Dodaj pracownika </b-nav-item>
-              <b-nav-item to="/admin/confirm-user" active>
-                Zatwierdź użytkowników
-              </b-nav-item>
-              <b-nav-item to="/admin/delete-user"> Usuń użytkownika</b-nav-item>
+              <b-nav-item to="/admin/confirm-user"> Zatwierdź użytkowników </b-nav-item>
+              <b-nav-item to="/admin/delete-user"> Usuń użytkownika </b-nav-item>
               <b-nav-item to="/admin/add-car"> Dodaj samochód do użytkownika </b-nav-item>
-              <b-nav-item to="/admin/delete-car"> Usuń samochód </b-nav-item>
+              <b-nav-item to="/admin/delete-car" active> Usuń samochód </b-nav-item>
               <b-nav-item to="/admin/add-repair"> Dodaj naprawę </b-nav-item>
               <b-nav-item to="/admin/delete-opinion"> Usuń opinię </b-nav-item>
             </b-navbar-nav>
           </b-collapse>
         </b-navbar>
       </b-card-header>
-
       <b-card-body class="text-center" style="max-width: 110rem; margin: auto">
         <b-jumbotron bg-variant="primary" text-variant="white" border-variant="dark">
-          <template #header>Lista użytkowników:</template>
+          <template #header>Lista samochodów:</template>
 
           <template #lead>
-            <br /><b-table
-              striped
-              hover
-              responsive
-              :items="unactiveUsers"
-              :fields="fields"
-            >
+            <br /><b-table striped hover responsive :items="cars" :fields="fields">
               <template #cell(action)="data">
-                <b-button @click="confirmUser(data.item.user_id)">
-                  Zatwierdź użytkownika
-                </b-button>
+                <b-button @click="deleteCar(data.item.car_id)"> Usuń samochód </b-button>
+                A
               </template>
-              <template> </template>
             </b-table>
           </template>
         </b-jumbotron>
@@ -55,20 +44,24 @@
 <script>
 import topNavbar from "../../components/Navbar/topNavbar.vue";
 export default {
-  components: { topNavbar },
   data() {
     return {
-      unactiveUsers: [],
+      cars: [],
       fields: [
         {
-          key: "lastname",
-          sortable: true,
-          label: "Nazwisko",
+          key: "car_brand",
+          sortable: false,
+          label: "Marka",
         },
         {
-          key: "name",
+          key: "car_model",
           sortable: false,
-          label: "Imię",
+          label: "Model",
+        },
+        {
+          key: "car_reg_number",
+          sortable: true,
+          label: "Numer rejestracyjny",
         },
         {
           key: "action",
@@ -78,28 +71,28 @@ export default {
       ],
     };
   },
+  components: { topNavbar },
   methods: {
-    async getUnactiveUsers() {
-      const result = await this.$user.getUnactiveUsers();
+    async getCars() {
+      const result = await this.$car.getCars();
       if (result.status === true) {
-        this.unactiveUsers = result.data;
+        this.cars = result.data;
+        console.log(this.cars);
       }
     },
-    async confirmUser(id) {
+    async deleteCar(id) {
       {
-        const result = await this.$user.confirmUser(id, {
-          user_confirmed: true,
-        });
+        const result = await this.$car.deleteCar(id);
 
         if (result.status === true) {
-          alert("Pomyślnie aktywowano użytkownika");
+          alert("Pomyślnie usunięto samochód");
           this.$router.go();
         }
       }
     },
   },
   mounted() {
-    this.getUnactiveUsers();
+    this.getCars();
   },
 };
 </script>

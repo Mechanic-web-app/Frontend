@@ -10,6 +10,8 @@ import Vue from "vue";
 import VueAxios from "vue-axios";
 import VueCookies from "vue-cookies";
 import VueRouter from "vue-router";
+import { uuid } from "vue-uuid";
+import * as VueGoogleMaps from "vue2-google-maps";
 import App from "./App.vue";
 import cookieHelper from "./helpers/cookieHelper";
 import chatHub from "./hubs/chatHub.js";
@@ -19,10 +21,10 @@ import authorizationService from "./services/authorizationService";
 import carService from "./services/carService";
 import chatRoomService from "./services/chatRoomService.js";
 import chatService from "./services/chatService.js";
+import opinionService from "./services/opinionService";
 import repairService from "./services/repairService.js";
 import userService from "./services/userService.js";
 import store from "./store";
-import { uuid }	from "vue-uuid"
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
@@ -36,12 +38,19 @@ Vue.use(carService);
 Vue.use(repairService);
 Vue.use(chatService);
 Vue.use(chatRoomService);
+Vue.use(opinionService);
 Vue.use(chatHub);
-Vue.use({uuid})
+Vue.use({ uuid });
+Vue.use(VueGoogleMaps, {
+	load: {
+		key: process.env.VUE_APP_GOOGLE_API_KEY,
+		libraries: "places",
+	},
+});
 
 Vue.filter("formatDate", function (value) {
 	if (value) {
-		return moment(String(value)).format("MM/DD/YYYY hh:mm");
+		return moment(String(value)).format("MM/DD/YYYY HH:mm");
 	}
 }),
 	(Vue.axios.defaults.baseURL = process.env.VUE_APP_API_BASE_URL);

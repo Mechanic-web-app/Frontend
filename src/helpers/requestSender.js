@@ -9,6 +9,7 @@ export default {
 				data,
 				params: config.params,
 			});
+			console.log(result.url);
 			return this.__responseWrapper(result);
 		} catch (error) {
 			return this.__responseWrapper(error, false);
@@ -43,9 +44,10 @@ export default {
 	},
 	__responseWrapper(result, status = true) {
 		const wrappedResponse = {
-			status: result.status === result.data.Success
-			? result.data.Success
-			: result.data.success,
+			status:
+				result.status === result.data.Success
+					? result.data.Success
+					: result.data.success,
 		};
 		if (status) {
 			wrappedResponse.data = result.data.data;
@@ -60,7 +62,7 @@ export default {
 	},
 	__userResponseWrapper(result, status = true) {
 		const wrappedResponse = {
-			status: result.status === 200
+			status: result.status === 200,
 		};
 		if (status) {
 			wrappedResponse.data = result.data;
