@@ -5,7 +5,8 @@
 	"scripts": {
 		"serve": "vue-cli-service serve",
 		"build": "vue-cli-service build",
-		"lint": "vue-cli-service lint"
+		"lint": "vue-cli-service lint",
+		"deploy": "node scripts/gh-pages-deploy.js"
 	},
 	"dependencies": {
 		"autoprefixer": "^9.8.8",
@@ -36,7 +37,8 @@
 		"@vue/cli-service": "^5.0.4",
 		"babel-eslint": "^10.1.0",
 		"eslint-plugin-vue": "^6.2.2",
-		"vue-template-compiler": "^2.6.11"
+		"vue-template-compiler": "^2.6.11",
+		 "execa": "latest"
 	},
 	"eslintConfig": {
 		"root": true,
