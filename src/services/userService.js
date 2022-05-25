@@ -5,7 +5,7 @@ export default function (Vue) {
 		async getUsers() {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Users/`,
+				url: process.env.VUE_APP_API_BASE_URL + `/api/Users/`,
 			});
 			return result;
 		},
@@ -13,7 +13,7 @@ export default function (Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "post",
-					url: `https://localhost:44385/api/Authentication/register`,
+					url: process.env.VUE_APP_API_BASE_URL + `/api/Authentication/register`,
 				},
 				request,
 			);
@@ -23,7 +23,7 @@ export default function (Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "post",
-					url: `https://localhost:44385/api/Authentication/employeeRegister`,
+					url: process.env.VUE_APP_API_BASE_URL + `/api/Authentication/employeeRegister`,
 				},
 				request,
 			);
@@ -32,7 +32,7 @@ export default function (Vue) {
 		async getUser(id) {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Users/${+id}`,
+				url: process.env.VUE_APP_API_BASE_URL + `/api/Users/${+id}`,
 			});
 			return result;
 		},
@@ -41,7 +41,7 @@ export default function (Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "put",
-					url: `https://localhost:44385/api/Users/${id}`,
+					url: process.env.VUE_APP_API_BASE_URL + `/api/Users/${id}`,
 				},
 				request,
 			);
@@ -52,7 +52,7 @@ export default function (Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "put",
-					url: `https://localhost:44385/api/Users/profileUpdate/${id}`,
+					url: process.env.VUE_APP_API_BASE_URL + `/api/Users/profileUpdate/${id}`,
 				},
 				request,
 			);
@@ -61,14 +61,14 @@ export default function (Vue) {
 		async deleteUser(id) {
 			const result = await requestSender.sendForUsers({
 				method: "delete",
-				url: `https://localhost:44385/api/Users/${id}`,
+				url: process.env.VUE_APP_API_BASE_URL + `/api/Users/${id}`,
 			});
 			return result;
 		},
 		async getUnactiveUsers() {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Users/byNotConfirmed/false`,
+				url: process.env.VUE_APP_API_BASE_URL + `/api/Users/byNotConfirmed/false`,
 			});
 			return result;
 		},

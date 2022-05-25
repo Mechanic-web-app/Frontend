@@ -2,9 +2,13 @@ import cookie from "vue-cookies";
 
 const SESSION_COOKIE_NAME = "common_token";
 const APP_DOMAIN =
-	process.env.VUE_APP_NODE_ENV === "prod" ? "localhost:8080" : "";
+	process.env.VUE_APP_NODE_ENV === "prod"
+		? "https://mechanic-web-app.github.io/"
+		: "";
 const APP_PATH =
-	process.env.VUE_APP_NODE_ENV === "prod" ? "localhost:44385" : "";
+	process.env.VUE_APP_NODE_ENV === "prod"
+		? "https://mechanic-web-app.herokuapp.com/"
+		: "";
 
 const defaultParams = {
 	expires: "2h",

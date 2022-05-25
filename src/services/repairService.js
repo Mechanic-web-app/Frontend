@@ -5,7 +5,7 @@ export default function(Vue) {
 		async getRepairs() {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Repairs`,
+				url: process.env.VUE_APP_API_BASE_URL + `/api/Repairs`,
 			});
 			return result;
 		},
@@ -13,7 +13,7 @@ export default function(Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "post",
-					url: `https://localhost:44385/api/Repairs`,
+					url: process.env.VUE_APP_API_BASE_URL + `/api/Repairs`,
 				},
 				request,
 			);
@@ -22,7 +22,7 @@ export default function(Vue) {
 		async getRepairsByCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Repairs/byCar/${id}`,
+				url: process.env.VUE_APP_API_BASE_URL + `/api/Repairs/byCar/${id}`,
 			});
 			return result;
 		},
@@ -30,7 +30,7 @@ export default function(Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "put",
-					url: `https://localhost:44385/api/Repairs/${id}`,
+					url: process.env.VUE_APP_API_BASE_URL + `/api/Repairs/${id}`,
 				},
 				request,
 			);
@@ -39,7 +39,7 @@ export default function(Vue) {
 		async deleteCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "delete",
-				url: `https://localhost:44385/api/Repairs/${id}`,
+				url: process.env.VUE_APP_API_BASE_URL + `/api/Repairs/${id}`,
 			});
 			return result;
 		},

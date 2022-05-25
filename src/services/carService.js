@@ -1,11 +1,11 @@
 import requestSender from "../helpers/requestSender";
 
-export default function(Vue) {
+export default function (Vue) {
 	Vue.car = {
 		async getCars() {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Cars`,
+				url: process.env.VUE_APP_API_BASE_URL + `/api/Cars`,
 			});
 			return result;
 		},
@@ -13,7 +13,7 @@ export default function(Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "post",
-					url: `https://localhost:44385/api/Cars`,
+					url: process.env.VUE_APP_API_BASE_URL + `/api/Cars`,
 				},
 				request,
 			);
@@ -22,14 +22,15 @@ export default function(Vue) {
 		async getCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: `https://localhost:44385/api/Cars/byUser/${id}`,
+				url:
+					process.env.VUE_APP_API_BASE_URL + `/api/Cars/byUser/${id}`,
 			});
 			return result;
 		},
 		async deleteCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "delete",
-				url: `https://localhost:44385/api/Cars/${id}`,
+				url: process.env.VUE_APP_API_BASE_URL + `/api/Cars/${id}`,
 			});
 			return result;
 		},

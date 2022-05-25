@@ -1,13 +1,15 @@
 import requestSender from "../helpers/requestSender.js";
 import store from "../store";
 
-export default function(Vue) {
+export default function (Vue) {
 	Vue.auth = {
 		async logIn(loginRequest) {
 			const result = await requestSender.send(
 				{
 					method: "post",
-					url: `https://localhost:44385/api/authentication/login`,
+					url:
+						process.env.VUE_APP_API_BASE_URL +
+						`/api/authentication/login`,
 				},
 				loginRequest,
 			);
@@ -19,7 +21,9 @@ export default function(Vue) {
 			const result = await requestSender.send(
 				{
 					method: "post",
-					url: `https://localhost:44385/api/authentication/register`,
+					url:
+						process.env.VUE_APP_API_BASE_URL +
+						`/api/authentication/register`,
 				},
 				registerRequest,
 			);
@@ -29,19 +33,11 @@ export default function(Vue) {
 			const result = await requestSender.send(
 				{
 					method: "post",
-					url: `https://localhost:44385/api/authentication/registerByAdmin`,
+					url:
+						process.env.VUE_APP_API_BASE_URL +
+						`/api/authentication/registerByAdmin`,
 				},
 				registerRequest,
-			);
-			return result;
-		},
-		async activateAccount(request) {
-			const result = await requestSender.send(
-				{
-					method: "put",
-					url: `/authentication`,
-				},
-				request,
 			);
 			return result;
 		},
