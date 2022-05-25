@@ -2,11 +2,11 @@ import cookie from "vue-cookies";
 
 const SESSION_COOKIE_NAME = "common_token";
 const APP_DOMAIN =
-	process.env.VUE_APP_NODE_ENV === "prod"
+	process.env.VUE_APP_NODE_ENV === "production"
 		? "https://mechanic-web-app.github.io/"
 		: "";
 const APP_PATH =
-	process.env.VUE_APP_NODE_ENV === "prod"
+	process.env.VUE_APP_NODE_ENV === "production"
 		? "https://mechanic-web-app.herokuapp.com/"
 		: "";
 
