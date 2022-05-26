@@ -31,10 +31,11 @@ jobs:
               env:
                   VUE_APP_API_BASE_URL: https://mechanic-web-app.herokuapp.com/
                   VUE_APP_NODE_ENV: production
+                  VUE_APP_GOOGLE_API_KEY: ${{ secrets.VUE_APP_GOOGLE_API_KEY }}
               run: npm run build
 
             - name: Deploy
               uses: peaceiris/actions-gh-pages@v3
               with:
-                  VUE_APP_GOOGLE_API_KEY: ${{ secrets.VUE_APP_GOOGLE_API_KEY }}
+                  github_token: ${{ secrets.GITHUB_TOKEN }}
                   publish_dir: ./dist
