@@ -176,23 +176,19 @@ export default {
       this.allOpenRows.push(item);
     },
     async addCar(brand, model, regNumber, user_id) {
-      if (this.isBrand && this.isModel && this.isRegNumber) {
-        this.isValidForm = true;
-        if (this.isValidForm) {
-          const result = await this.$car.addCar({
-            car_brand: brand,
-            car_model: model,
-            car_reg_number: regNumber,
-            car_user_id: user_id,
-          });
+      let isValidForm = await this.$refs.addedCar.validate();
+      if (this.isValidForm) {
+        const result = await this.$car.addCar({
+          car_brand: brand,
+          car_model: model,
+          car_reg_number: regNumber,
+          car_user_id: user_id,
+        });
 
-          if (result.status === true) {
-            alert("Samochód dodany pomyślnie");
-            this.$router.push({ name: "addCar" });
-          }
+        if (result.status === true) {
+          alert("Samochód dodany pomyślnie");
+          this.$router.push({ name: "addCar" });
         }
-      } else {
-        alert("Proszę uzupełnić wszystkie pola");
       }
     },
   },

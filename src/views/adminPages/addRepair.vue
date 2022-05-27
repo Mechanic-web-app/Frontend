@@ -178,7 +178,7 @@ export default {
       this.allOpenRows.push(item);
     },
     async addRepair(description, cost, date, car_id) {
-      let isValidForm = true;
+      let isValidForm = await this.$refs.addedRepair.validate();
       if (isValidForm) {
         const result = await this.$repair.addRepair({
           repair_description: description,

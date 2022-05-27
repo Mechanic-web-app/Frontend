@@ -146,34 +146,37 @@ export default {
       if (this.$connection.connection.connectionState === 1) {
         if (logged === false) {
           this.unloggedUserId = this.uuid;
-          console.log(this.unloggedUserId, this.chatForm.name, this.chatForm.lastname);
-          await this.$connection.invoke(
-            "ConnectToChatRoom",
-            {
-              Room_id: this.unloggedUserId,
-              RoomName: this.chatForm.name + " " + this.chatForm.lastname,
-            },
-            {
-              CallerId: this.unloggedUserId,
-              CallerName: this.chatForm.name,
-              CallerLastname: this.chatForm.lastname,
-            }
-          );
-        } else {
-          await this.$connection.invoke(
-            "ConnectToChatRoom",
-            {
-              Room_id: this.userId,
-              RoomName: this.userName + " " + this.userLastname,
-            },
-            {
-              CallerId: this.userId,
-              CallerName: this.userName,
-              CallerLastname: this.userLastname,
-            }
-          );
+          let isValidForm = await this.$refs.chatForm.validate();
+          if (isValidForm) {
+            await this.$connection.invoke(
+              "ConnectToChatRoom",
+              {
+                Room_id: this.unloggedUserId,
+                RoomName: this.chatForm.name + " " + this.chatForm.lastname,
+              },
+              {
+                CallerId: this.unloggedUserId,
+                CallerName: this.chatForm.name,
+                CallerLastname: this.chatForm.lastname,
+              }
+            );
+            this.chatStarted = true;
+          } else {
+            await this.$connection.invoke(
+              "ConnectToChatRoom",
+              {
+                Room_id: this.userId,
+                RoomName: this.userName + " " + this.userLastname,
+              },
+              {
+                CallerId: this.userId,
+                CallerName: this.userName,
+                CallerLastname: this.userLastname,
+              }
+            );
+            this.chatStarted = true;
+          }
         }
-        this.chatStarted = true;
       }
     },
     async sendMessage(logged) {

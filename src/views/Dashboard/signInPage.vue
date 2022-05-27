@@ -67,19 +67,22 @@ export default {
   },
   methods: {
     async submitForm() {
-      const result = await this.$auth.logIn({
-        email: this.loginForm.email,
-        password: this.loginForm.password,
-      });
-      if (result.status === true) {
-        alert("Zalogowano pomyślnie");
-        this.$router.push({ name: "mainPage" });
-      } else {
-        alert(
-          "Podczas logowania wystąpił błąd. Sprawdź poprawność wprowadzonych danych oraz czy twoje konto zostało potwierdzone."
-        );
+      let isValidForm = await this.$refs.loginForm.validate();
+      if (isValidForm) {
+        const result = await this.$auth.logIn({
+          email: this.loginForm.email,
+          password: this.loginForm.password,
+        });
+        if (result.status === true) {
+          alert("Zalogowano pomyślnie");
+          this.$router.push({ name: "mainPage" });
+        } else {
+          alert(
+            "Podczas logowania wystąpił błąd. Sprawdź poprawność wprowadzonych danych oraz czy twoje konto zostało potwierdzone."
+          );
+        }
+        console.log(result);
       }
-      console.log(result);
     },
     resetForm(loginForm) {
       this.$refs[loginForm].resetFields();

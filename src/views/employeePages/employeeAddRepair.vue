@@ -39,8 +39,7 @@
             >
               <template #cell(action)="row">
                 <b-button size="sm" @click="row.toggleDetails">
-                  {{ row.detailsShowing ? "Hide" : "Show" }}
-                  Details
+                  {{ row.detailsShowing ? "Schowaj" : "Dodaj naprawę" }}
                 </b-button>
               </template>
               <template #row-details="scope">
@@ -87,7 +86,7 @@
                       )
                     "
                   >
-                    Add Car
+                    Dodaj naprawę
                   </b-button>
                 </b-card>
               </template>
@@ -106,21 +105,21 @@ export default {
   data() {
     var validateDescription = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Proszę wprowadzić email"));
+        callback(new Error("Proszę wprowadzić opis"));
       } else {
         callback();
       }
     };
     var validateCost = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Proszę wprowadzić email"));
+        callback(new Error("Proszę wprowadzić koszt"));
       } else {
         callback();
       }
     };
     var validateDate = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Proszę wprowadzić email"));
+        callback(new Error("Proszę wprowadzić datę"));
       } else {
         callback();
       }
@@ -184,7 +183,7 @@ export default {
       this.allOpenRows.push(item);
     },
     async addRepair(description, cost, date, car_id) {
-      let isValidForm = true;
+      let isValidForm = await this.$refs.addedRepair.validate();
       if (isValidForm) {
         const result = await this.$repair.addRepair({
           repair_description: description,
