@@ -1,11 +1,11 @@
 import requestSender from "../helpers/requestSender";
 
-export default function(Vue) {
+export default function (Vue) {
 	Vue.repair = {
 		async getRepairs() {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: process.env.VUE_APP_API_BASE_URL + `/api/Repairs`,
+				url: `/api/Repairs`,
 			});
 			return result;
 		},
@@ -13,7 +13,7 @@ export default function(Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "post",
-					url: process.env.VUE_APP_API_BASE_URL + `/api/Repairs`,
+					url: `/api/Repairs`,
 				},
 				request,
 			);
@@ -22,7 +22,7 @@ export default function(Vue) {
 		async getRepairsByCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: process.env.VUE_APP_API_BASE_URL + `/api/Repairs/byCar/${id}`,
+				url: `/api/Repairs/byCar/${id}`,
 			});
 			return result;
 		},
@@ -30,7 +30,7 @@ export default function(Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "put",
-					url: process.env.VUE_APP_API_BASE_URL + `/api/Repairs/${id}`,
+					url: `/api/Repairs/${id}`,
 				},
 				request,
 			);
@@ -39,7 +39,7 @@ export default function(Vue) {
 		async deleteCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "delete",
-				url: process.env.VUE_APP_API_BASE_URL + `/api/Repairs/${id}`,
+				url: `/api/Repairs/${id}`,
 			});
 			return result;
 		},

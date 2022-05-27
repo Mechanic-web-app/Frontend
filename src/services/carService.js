@@ -5,7 +5,7 @@ export default function (Vue) {
 		async getCars() {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: process.env.VUE_APP_API_BASE_URL + `/api/Cars`,
+				url: `/api/Cars`,
 			});
 			return result;
 		},
@@ -13,7 +13,7 @@ export default function (Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "post",
-					url: process.env.VUE_APP_API_BASE_URL + `/api/Cars`,
+					url: `/api/Cars`,
 				},
 				request,
 			);
@@ -23,14 +23,14 @@ export default function (Vue) {
 			const result = await requestSender.sendForUsers({
 				method: "get",
 				url:
-					process.env.VUE_APP_API_BASE_URL + `/api/Cars/byUser/${id}`,
+					`/api/Cars/byUser/${id}`,
 			});
 			return result;
 		},
 		async deleteCar(id) {
 			const result = await requestSender.sendForUsers({
 				method: "delete",
-				url: process.env.VUE_APP_API_BASE_URL + `/api/Cars/${id}`,
+				url: `/api/Cars/${id}`,
 			});
 			return result;
 		},

@@ -7,11 +7,10 @@ export default function (Vue) {
 			const result = await requestSender.send(
 				{
 					method: "post",
-					url:
-						process.env.VUE_APP_API_BASE_URL +
-						`/api/authentication/login`,
+					url: `/api/authentication/login`,
 				},
 				loginRequest,
+				console.log(this.result),
 			);
 			if (result.status)
 				store.dispatch("setSession", result.data.accessToken);
@@ -21,9 +20,7 @@ export default function (Vue) {
 			const result = await requestSender.send(
 				{
 					method: "post",
-					url:
-						process.env.VUE_APP_API_BASE_URL +
-						`/api/authentication/register`,
+					url: `/api/authentication/register`,
 				},
 				registerRequest,
 			);
@@ -33,9 +30,7 @@ export default function (Vue) {
 			const result = await requestSender.send(
 				{
 					method: "post",
-					url:
-						process.env.VUE_APP_API_BASE_URL +
-						`/api/authentication/registerByAdmin`,
+					url: `/api/authentication/registerByAdmin`,
 				},
 				registerRequest,
 			);

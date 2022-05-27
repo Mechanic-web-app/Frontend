@@ -5,7 +5,7 @@ export default function (Vue) {
 		async getOpinions() {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: process.env.VUE_APP_API_BASE_URL + `/api/Opinions`,
+				url: `/api/Opinions`,
 			});
 			return result;
 		},
@@ -13,7 +13,7 @@ export default function (Vue) {
 			const result = await requestSender.sendForUsers(
 				{
 					method: "post",
-					url: process.env.VUE_APP_API_BASE_URL + `/api/Opinions`,
+					url: `/api/Opinions`,
 				},
 				request,
 			);
@@ -22,7 +22,7 @@ export default function (Vue) {
 		async deleteOpinion(id) {
 			const result = await requestSender.sendForUsers({
 				method: "delete",
-				url: process.env.VUE_APP_API_BASE_URL + `/api/Opinions/${id}`,
+				url: `/api/Opinions/${id}`,
 			});
 			return result;
 		},

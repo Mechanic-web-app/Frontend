@@ -16,7 +16,7 @@ export default function (Vue) {
 		async getChatRooms() {
 			const result = await requestSender.sendForUsers({
 				method: "get",
-				url: "https://localhost:44385/api/ChatRoom",
+				url: "/api/ChatRoom",
 			});
 			console.log(result);
 			return result;
