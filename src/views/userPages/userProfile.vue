@@ -15,7 +15,7 @@
             >Wystaw opinię</b-button
           >
           <b-modal id="modal-1" title="Edytuj swoje dane">
-            <div class="container">
+            <div>
               <el-form
                 :model="updateForm"
                 status-icon
@@ -73,12 +73,13 @@
                 v-model="opinionRate"
                 variant="primary"
                 class="mb-2"
-              ></b-form-rating>
+              ></b-form-rating
+              ><br />
               <b-form-textarea
                 id="textarea"
                 v-model="opinionDescription"
                 placeholder="Tu wpisz treść swojej opinii"
-                rows="3"
+                rows="5"
                 max-rows="6"
               ></b-form-textarea>
             </div>
@@ -279,7 +280,7 @@ export default {
 };
 </script>
 
-<style>
+<style scoped>
 .card-body h1 {
   color: white;
 }

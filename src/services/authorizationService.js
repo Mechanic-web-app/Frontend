@@ -7,7 +7,7 @@ export default function (Vue) {
 			const result = await requestSender.send(
 				{
 					method: "post",
-					url: `/api/authentication/login`,
+					url: `api/authentication/login`,
 				},
 				loginRequest,
 				console.log(this.result),

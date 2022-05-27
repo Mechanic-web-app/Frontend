@@ -13,7 +13,7 @@
           style="min-height: 50vh; width: 50%; margin: auto"
         >
           <b-row class="d-flex justify-content-center align-items-start flex-wrap">
-            <b-row class="d-flex justify-content-center align-items-center mb-auto p-8">
+            <b-row class="d-flex justify-content-center align-items-center mb-auto p-4">
               <b-icon icon="envelope" font-scale="4"></b-icon>
             </b-row>
             <b-row
@@ -23,21 +23,21 @@
             </b-row>
           </b-row>
           <b-row class="d-flex justify-content-center align-items-start flex-wrap">
-            <b-row class="d-flex justify-content-center align-items-center mb-auto p-8">
+            <b-row class="d-flex justify-content-center align-items-center mb-auto p-4">
               <b-icon icon="telephone" font-scale="4"></b-icon>
             </b-row>
             <b-row
-              class="d-flex justify-content-center align-items-center mb-auto p-8 text-center"
+              class="d-flex justify-content-center align-items-center mb-auto p-4 text-center"
             >
               <h3>+48 123 456 789</h3>
             </b-row>
           </b-row>
           <b-row class="geoInfo">
-            <b-row class="d-flex justify-content-center align-items-center mb-auto p-8">
+            <b-row class="d-flex justify-content-center align-items-center mb-auto p-4">
               <b-icon icon="geo-alt" font-scale="4"></b-icon>
             </b-row>
             <b-row
-              class="d-flex justify-content-center align-items-center mb-auto p-8 text-center"
+              class="d-flex justify-content-center align-items-center mb-auto p-4 text-center"
             >
               <h3>ul. Skłodowskiej-Curie 98, 59-300 Lubin</h3>
             </b-row>

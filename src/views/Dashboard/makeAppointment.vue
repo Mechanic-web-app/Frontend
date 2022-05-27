@@ -161,21 +161,21 @@ export default {
               }
             );
             this.chatStarted = true;
-          } else {
-            await this.$connection.invoke(
-              "ConnectToChatRoom",
-              {
-                Room_id: this.userId,
-                RoomName: this.userName + " " + this.userLastname,
-              },
-              {
-                CallerId: this.userId,
-                CallerName: this.userName,
-                CallerLastname: this.userLastname,
-              }
-            );
-            this.chatStarted = true;
           }
+        } else {
+          await this.$connection.invoke(
+            "ConnectToChatRoom",
+            {
+              Room_id: this.userId,
+              RoomName: this.userName + " " + this.userLastname,
+            },
+            {
+              CallerId: this.userId,
+              CallerName: this.userName,
+              CallerLastname: this.userLastname,
+            }
+          );
+          this.chatStarted = true;
         }
       }
     },

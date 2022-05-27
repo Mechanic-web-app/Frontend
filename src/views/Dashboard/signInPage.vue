@@ -76,7 +76,7 @@ export default {
         if (result.status === true) {
           alert("Zalogowano pomyślnie");
           this.$router.push({ name: "mainPage" });
-        } else {
+        } else if (result.status == undefined) {
           alert(
             "Podczas logowania wystąpił błąd. Sprawdź poprawność wprowadzonych danych oraz czy twoje konto zostało potwierdzone."
           );
