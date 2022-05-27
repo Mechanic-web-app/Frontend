@@ -205,12 +205,21 @@ export default {
   margin: auto;
   padding: 0;
   background: #0d6efd;
+  font-size: 1rem;
   border-radius: 0.3rem;
 }
 .card-header .navbar-toggler {
   border-color: #0d6efd;
 }
-
+@media only screen and (max-width: 800px) {
+  .chatMessages {
+    padding-left: 1%;
+    width: 100%;
+    height: 60vh;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+}
 @media only screen and (max-width: 800px) {
   .chatSidebar {
     width: 30%;

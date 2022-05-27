@@ -3,12 +3,12 @@ import cookie from "vue-cookies";
 const SESSION_COOKIE_NAME = "common_token";
 const APP_DOMAIN =
 	process.env.VUE_APP_NODE_ENV === "production"
-		? "https://mechanic-web-app.github.io/"
-		: "localhost:8080";
+		? "https://mechanic-web-app.github.io"
+		: "";
 const APP_PATH =
 	process.env.VUE_APP_NODE_ENV === "production"
-		? "https://mechanic-web-app.herokuapp.com/"
-		: "localhost:44385";
+		? "https://mechanic-web-app.herokuapp.com"
+		: "";
 
 const defaultParams = {
 	expires: "2h",

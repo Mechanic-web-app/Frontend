@@ -57,20 +57,6 @@ export default {
   computed: {
     ...mapGetters(["isAdmin", "isEmployee", "isUser", "isLogged"]),
   },
-  methods: {
-    employeeChatObserver() {
-      if (this.isEmployee) {
-        this.connect();
-        this.$chatHub.$on("push-notification", (userName, userLastname) => {
-          alert(userName + " " + userLastname + " wysłał wiadomość");
-        });
-        console.log("Employee connected to hub");
-      }
-    },
-  },
-  mounted() {
-    this.employeeChatObserver();
-  },
 };
 </script>
 

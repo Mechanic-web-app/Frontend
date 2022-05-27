@@ -2,7 +2,7 @@
   <div>
     <top-navbar></top-navbar>
     <b-jumbotron
-      style="width: 80%; margin: auto; margin-top: 10vh; height: 80vh; padding: 0"
+      style="width: 80%; margin: auto; margin-top: 10vh; min-height: 80vh; padding: 0"
       bg-variant="primary"
       text-variant="white"
     >
@@ -112,7 +112,7 @@ export default {
     };
     return {
       unloggedUserId: "",
-      chatStarted: true,
+      chatStarted: false,
       chatMessage: "",
       messages: [],
       chatForm: {
@@ -264,44 +264,52 @@ export default {
   color: black;
   word-break: break-word;
 }
+
+.chatMessages {
+  padding-left: 1%;
+  width: 100%;
+  height: 65vh;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
 @media only screen and (max-width: 800px) {
   .messageBox {
-    width: 50%;
-    height: 100%;
+    width: 65%;
+    height: 15vh !important;
     float: left;
   }
 }
 @media only screen and (max-width: 1400px) {
   .messageBox {
-    width: 85%;
-    height: 100%;
+    width: 75%;
+    height: 15vh !important;
     float: left;
   }
 }
 @media only screen and (min-width: 1401px) {
   .messageBox {
     width: 80%;
-    min-height: 100%;
+    height: 15vh !important;
     float: left;
   }
 }
 @media only screen and (min-width: 1401px) {
   .sendBtn {
-    height: 100%;
-    width: 15%;
+    height: 15vh;
+    width: 20%;
     float: left;
   }
 }
 @media only screen and (max-width: 1400px) {
   .sendBtn {
-    height: 80%;
-    width: 15%;
+    height: 15vh;
+    width: 20%;
     float: left;
   }
 }
 @media only screen and (max-width: 800px) {
   .sendBtn {
-    height: 80%;
+    height: 15vh;
     width: 25%;
     float: left;
   }

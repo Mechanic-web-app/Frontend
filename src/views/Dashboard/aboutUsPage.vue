@@ -83,15 +83,6 @@ export default {
     ...mapGetters(["isAdmin", "isEmployee", "isUser", "isLogged"]),
   },
   methods: {
-    employeeChatObserver() {
-      if (this.isEmployee) {
-        this.connect();
-        this.$chatHub.$on("push-notification", (userName, userLastname) => {
-          alert(userName + " " + userLastname + " wysłał wiadomość");
-        });
-        console.log("Employee connected to hub");
-      }
-    },
     async getOpinions() {
       const result = await this.$opinion.getOpinions();
       if (result.status === true) {
@@ -101,7 +92,6 @@ export default {
     },
   },
   mounted() {
-    this.employeeChatObserver();
     this.getOpinions();
   },
 };

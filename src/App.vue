@@ -25,9 +25,16 @@ export default {
     restoreSession() {
       this.$router.push(roleRedirect[this.user.role]);
     },
-    showEnv() {
-      console.log(process.env);
-      console.log(process.env.VUE_APP_GOOGLE_API_KEY);
+    employeeChatObserver() {
+      if (this.isEmployee) {
+        this.connect();
+        this.$chatHub.$on("push-notification", (userName, userLastname) => {
+          if (userName !== "Employee") {
+            alert(userName + " " + userLastname + " wysłał wiadomość");
+          }
+        });
+        console.log("Employee connected to hub");
+      }
     },
   },
   watch: {
@@ -36,7 +43,7 @@ export default {
         this.restoreSession(newVal);
         console.log(newVal);
       } else {
-        this.$router.push({ name: "Login" });
+        this.$router.push({ name: "signIn" });
       }
     },
     hasToken(newVal) {
@@ -44,7 +51,7 @@ export default {
     },
   },
   mounted() {
-    this.showEnv();
+    this.employeeChatObserver();
   },
 };
 </script>
