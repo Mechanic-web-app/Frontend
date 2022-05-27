@@ -19,7 +19,7 @@
             <b-row
               class="d-flex justify-content-center align-items-center mb-auto p-8 text-center"
             >
-              <h3>bsn@gmail.com</h3>
+              <h3>bns@gmail.com</h3>
             </b-row>
           </b-row>
           <b-row class="d-flex justify-content-center align-items-start flex-wrap">

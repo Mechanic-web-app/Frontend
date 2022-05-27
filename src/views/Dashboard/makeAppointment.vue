@@ -42,7 +42,7 @@
         </b-button>
       </div>
       <div v-if="chatStarted" class="Chat">
-        <b-container>
+        <div>
           <b-row style="height: 70vh">
             <b-col
               cols="4"
@@ -85,7 +85,7 @@
               </div>
             </b-col>
           </b-row>
-        </b-container>
+        </div>
       </div>
     </b-jumbotron>
   </div>
@@ -112,7 +112,7 @@ export default {
     };
     return {
       unloggedUserId: "",
-      chatStarted: false,
+      chatStarted: true,
       chatMessage: "",
       messages: [],
       chatForm: {

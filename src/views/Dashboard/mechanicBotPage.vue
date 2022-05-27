@@ -6,7 +6,7 @@
       bg-variant="primary"
       text-variant="white"
     >
-      <b-container>
+      <div>
         <b-row style="height: 100%; width: 100%">
           <b-col
             cols="12"
@@ -822,7 +822,7 @@
             </b-button>
           </b-col>
         </b-row>
-      </b-container>
+      </div>
     </b-jumbotron>
   </div>
 </template>
