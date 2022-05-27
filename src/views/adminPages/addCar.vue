@@ -177,7 +177,7 @@ export default {
     },
     async addCar(brand, model, regNumber, user_id) {
       let isValidForm = await this.$refs.addedCar.validate();
-      if (this.isValidForm) {
+      if (isValidForm) {
         const result = await this.$car.addCar({
           car_brand: brand,
           car_model: model,
