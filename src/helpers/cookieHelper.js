@@ -6,9 +6,7 @@ const APP_DOMAIN =
 		? "https://mechanic-web-app.github.io"
 		: "";
 const APP_PATH =
-	process.env.VUE_APP_NODE_ENV === "production"
-		? "https://mechanic-web-app.herokuapp.com"
-		: "";
+	process.env.VUE_APP_NODE_ENV === "production" ? "/Frontend" : "";
 
 const defaultParams = {
 	expires: "2h",
