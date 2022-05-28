@@ -81,7 +81,6 @@ export default {
             "Podczas logowania wystąpił błąd. Sprawdź poprawność wprowadzonych danych oraz czy twoje konto zostało potwierdzone."
           );
         }
-        console.log(result);
       }
     },
     resetForm(loginForm) {

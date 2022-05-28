@@ -233,14 +233,12 @@ export default {
       const result = await this.$car.getCar(this.userId);
       if (result.status === true) {
         this.cars = result.data;
-        console.log(this.cars);
       }
     },
     async getRepairs(carId) {
       const result = await this.$repair.getRepairsByCar(carId);
       if (result.status === true) {
         this.repairs = result.data;
-        console.log(this.repairs);
       }
     },
     async submitForm() {

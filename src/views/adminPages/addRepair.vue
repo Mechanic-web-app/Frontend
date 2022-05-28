@@ -103,21 +103,21 @@ export default {
   data() {
     var validateDescription = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Proszę wprowadzić email"));
+        callback(new Error("Proszę wprowadzić opis"));
       } else {
         callback();
       }
     };
     var validateCost = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Proszę wprowadzić email"));
+        callback(new Error("Proszę wprowadzić koszt"));
       } else {
         callback();
       }
     };
     var validateDate = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Proszę wprowadzić email"));
+        callback(new Error("Proszę wprowadzić datę"));
       } else {
         callback();
       }
@@ -164,7 +164,6 @@ export default {
       const result = await this.$car.getCars();
       if (result.status === true) {
         this.cars = result.data;
-        console.log(this.cars);
       }
     },
     handleRowClicked(item) {

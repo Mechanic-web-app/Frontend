@@ -76,17 +76,6 @@ export default {
     ...mapGetters(["isAdmin", "isEmployee", "isUser", "isLogged"]),
   },
   methods: {
-    employeeChatObserver() {
-      if (this.isEmployee) {
-        this.connect();
-        this.$chatHub.$on("push-notification", (userName, userLastname) => {
-          if (userName !== "Employee") {
-            alert(userName + " " + userLastname + " wysłał wiadomość");
-          }
-        });
-        console.log("Employee connected to hub");
-      }
-    },
     geolocate() {
       navigator.geolocation.getCurrentPosition((position) => {
         this.center = {
@@ -97,7 +86,6 @@ export default {
     },
   },
   mounted() {
-    this.employeeChatObserver();
     this.geolocate();
   },
 };

@@ -1,5 +1,4 @@
 export default function parseJwt(token) {
-	console.log(token)
 	const tokenPayload = token.split(".")[1];
 	const base64 = tokenPayload.replace(/-/g, "+").replace(/_/g, "/");
 	const content = decodeURIComponent(

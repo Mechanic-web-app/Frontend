@@ -77,7 +77,6 @@ export default {
       const result = await this.$car.getCars();
       if (result.status === true) {
         this.cars = result.data;
-        console.log(this.cars);
       }
     },
     async deleteCar(id) {

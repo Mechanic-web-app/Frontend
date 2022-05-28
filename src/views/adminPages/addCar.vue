@@ -162,7 +162,6 @@ export default {
       const result = await this.$user.getUsers();
       if (result.status === true) {
         this.users = result.data;
-        console.log(this.users);
       }
     },
     handleRowClicked(item) {

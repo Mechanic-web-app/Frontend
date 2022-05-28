@@ -87,7 +87,6 @@ export default {
       const result = await this.$opinion.getOpinions();
       if (result.status === true) {
         this.opinions = result.data;
-        console.log(this.opinions);
       }
     },
   },

@@ -18,7 +18,6 @@ export default function (Vue) {
 				method: "get",
 				url: "/api/ChatRoom",
 			});
-			console.log(result);
 			return result;
 		},
 	};

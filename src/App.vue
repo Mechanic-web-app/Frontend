@@ -41,7 +41,6 @@ export default {
     user(newVal) {
       if (newVal !== null) {
         this.restoreSession(newVal);
-        console.log(newVal);
       } else {
         this.$router.push({ name: "signIn" });
       }

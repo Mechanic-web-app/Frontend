@@ -32,7 +32,6 @@ export default new Vuex.Store({
 	},
 	actions: {
 		setSession({ commit }, token) {
-			console.log(token);
 			commit("storeUser", parseJwt(token));
 			cookieHelper.setSessionCookie(token);
 		},

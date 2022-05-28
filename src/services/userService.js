@@ -37,7 +37,6 @@ export default function (Vue) {
 			return result;
 		},
 		async confirmUser(id, request) {
-			console.log(id);
 			const result = await requestSender.sendForUsers(
 				{
 					method: "put",
@@ -48,7 +47,6 @@ export default function (Vue) {
 			return result;
 		},
 		async profileUpdate(id, request) {
-			console.log(id);
 			const result = await requestSender.sendForUsers(
 				{
 					method: "put",

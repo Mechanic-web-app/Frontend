@@ -90,20 +90,15 @@ export default {
   },
   methods: {
     async getChatRooms() {
-      console.log("1");
       const result = await this.$chatroom.getChatRooms();
-      console.log(result);
       if (result.status === true) {
         this.chatRooms = result.data;
-        console.log(result);
-        console.log(this.chatRooms);
       }
     },
     async pickRoom(roomId, roomName) {
       this.roomId = roomId;
       this.roomName = roomName;
       if (this.$connection.connection.connectionState === 1) {
-        console.log(this.$connection.connection);
         await this.$connection.invoke(
           "ConnectToChatRoom",
           {
@@ -117,7 +112,6 @@ export default {
           }
         );
       }
-      console.log(roomId);
     },
     async sendMessage() {
       if (this.$connection.connection.connectionState === 1) {
@@ -129,9 +123,7 @@ export default {
           UserLastname: this.userLastname,
           MessageContext: this.chatMessage,
         });
-        console.log("Send");
         this.chatMessage = "";
-        console.log(this.messages);
       }
     },
     sortedMessages() {

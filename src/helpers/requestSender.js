@@ -3,15 +3,12 @@ import axios from "axios";
 export default {
 	async send(config, data = null) {
 		try {
-			console.log(config);
-			console.log("work");
 			const result = await axios({
 				method: config.method,
 				url: config.url,
 				data,
 				params: config.params,
 			});
-			console.log(result.url);
 			return this.__responseWrapper(result);
 		} catch (error) {
 			return this.__responseWrapper(error, false);

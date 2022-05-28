@@ -39,8 +39,7 @@
             >
               <template #cell(action)="row">
                 <b-button size="sm" @click="row.toggleDetails">
-                  {{ row.detailsShowing ? "Hide" : "Show" }}
-                  Details
+                  {{ row.detailsShowing ? "Schowaj" : "Dodaj samochód" }}
                 </b-button>
               </template>
               <template #row-details="scope">
@@ -79,7 +78,7 @@
                       )
                     "
                   >
-                    Add Car
+                    Dodaj samochód
                   </b-button>
                 </b-card>
               </template>
@@ -100,7 +99,7 @@ export default {
   data() {
     var validateBrand = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Proszę wprowadzić email"));
+        callback(new Error("Proszę wprowadzić markę"));
       } else {
         this.isBrand = true;
         callback();
@@ -108,7 +107,7 @@ export default {
     };
     var validateModel = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Proszę wprowadzić email"));
+        callback(new Error("Proszę wprowadzić model"));
       } else {
         this.isModel = true;
         callback();
@@ -116,7 +115,7 @@ export default {
     };
     var validateRegNumber = (rule, value, callback) => {
       if (value === "") {
-        callback(new Error("Proszę wprowadzić email"));
+        callback(new Error("Proszę wprowadzić numer rejestracyjny"));
       } else {
         this.isRegNumber = true;
         callback();
@@ -162,7 +161,6 @@ export default {
       const result = await this.$user.getUsers();
       if (result.status === true) {
         this.users = result.data;
-        console.log(this.users);
       }
     },
     handleRowClicked(item) {

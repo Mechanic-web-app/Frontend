@@ -201,7 +201,6 @@ export default {
           });
         }
         this.chatMessage = "";
-        console.log(this.messages);
       }
     },
     sortedMessages() {

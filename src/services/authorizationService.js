@@ -10,7 +10,6 @@ export default function (Vue) {
 					url: `/api/authentication/login`,
 				},
 				loginRequest,
-				console.log(this.result),
 			);
 			if (result.status)
 				store.dispatch("setSession", result.data.accessToken);
